@@ -2,726 +2,968 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Muhammad Azam • Portfolio (azamagr)</title>
-  <meta name="description" content="Muhammad Azam — BSSE student & aspiring Full Stack Developer. React, Laravel, MongoDB. Portfolio & projects." />
-  <link rel="icon" href="#favicon" />
-  <!--
-    Single-file professional portfolio for azamagr.github.io
-    - Dark / Light theme toggle (persistent)
-    - Responsive and accessible layout
-    - Sections: Hero, About, Skills, Projects, Experience, Education, Certifications, Resume, Contact
-    - Project modals, animated interactions, keyboard accessible
-    - Downloadable resume (replace assets/resume.pdf)
-    - Replace assets/profile.jpg with your photo
-  -->
-
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Muhammad Azam — Full Stack Developer | azamagr</title>
+  <meta name="description" content="Portfolio of Muhammad Azam — BS Software Engineering student, Full Stack Web Developer (React, Laravel, MongoDB). Contact: azamghafoorreal@gmail.com" />
+  <meta name="author" content="Muhammad Azam (azamagr)" />
+  <!-- Fav icon (simple SVG as data URI) -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%25%22 height=%22100%25%22 rx=%2212%22 fill=%22%230e76a8%22/><text x=%2250%25%22 y=%2255%25%22 font-size=%2248%22 text-anchor=%22middle%22 fill=%22white%22 font-family=%22Arial%22>AGR</text></svg>" />
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
   <style>
-    /* -------------------- RESET -------------------- */
+    /* ------------------------------------------------------------
+       CSS RESET (minimal)
+       ------------------------------------------------------------ */
     :root{
-      --bg: #0f1724; /* dark */
-      --card: #0b1220;
-      --muted: #98a0b3;
-      --text: #e6eef8;
-      --accent: #4f46e5; /* indigo */
-      --accent-2: #06b6d4; /* teal */
-      --glass: rgba(255,255,255,0.03);
-      --glass-2: rgba(255,255,255,0.02);
-      --success:#10b981;
+      --bg:#0f1724;             /* default background (dark) */
+      --panel:#0b1220;
+      --muted:#9aa6b2;
+      --text:#e6eef6;
+      --accent:#0ea5a4;         /* teal-ish */
+      --accent-2:#6c63ff;      /* secondary accent */
+      --glass: rgba(255,255,255,0.04);
+      --card:#0b1a26;
+      --success:#16a34a;
       --danger:#ef4444;
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
+      --shadow: 0 6px 18px rgba(2,6,23,0.6);
+      --radius:12px;
+      --max-width:1100px;
+      --mono: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      --transition: 260ms cubic-bezier(.2,.9,.2,1);
+      --glass-border: rgba(255,255,255,0.03);
+      --glass-2: rgba(255,255,255,0.02);
     }
-    [data-theme='light']{
-      --bg: #f7fafc;
-      --card: #ffffff;
-      --muted: #475569;
-      --text: #0b1220;
-      --accent: #0ea5e9;
-      --accent-2: #7c3aed;
-      --glass: rgba(11,18,32,0.03);
-      --glass-2: rgba(11,18,32,0.02);
+    :root.light {
+      --bg:#f5f7fb;
+      --panel:#ffffff;
+      --muted:#51606a;
+      --text:#051024;
+      --accent:#0e76a8;
+      --accent-2:#6c63ff;
+      --glass: rgba(2,6,23,0.03);
+      --card:#ffffff;
+      --shadow: 0 10px 30px rgba(15,23,36,0.06);
+      --glass-border: rgba(2,6,23,0.04);
+      --glass-2: rgba(2,6,23,0.02);
     }
 
-    html,body{height:100%;}
     *{box-sizing:border-box}
+    html,body{height:100%}
     body{
       margin:0;
-      min-height:100%;
-      background: linear-gradient(180deg,var(--bg), color-mix(in srgb, var(--bg) 70%, transparent));
+      font-family:var(--mono);
+      background:linear-gradient(180deg,var(--bg), rgba(7,14,22,0.7));
       color:var(--text);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
       line-height:1.45;
-      padding:0 24px 80px;
+      transition: background var(--transition), color var(--transition);
     }
-    
-    /* -------------------- LAYOUT -------------------- */
-    .container{max-width:1100px;margin:28px auto;padding:28px;border-radius:14px;background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);backdrop-filter: blur(6px);}
-    header{display:flex;align-items:center;justify-content:space-between;gap:16px}
-    .brand{display:flex;align-items:center;gap:12px}
-    .logo{
-      width:54px;height:54px;border-radius:12px;display:grid;place-items:center;font-weight:700;font-size:20px;color:var(--card);background: linear-gradient(135deg,var(--accent),var(--accent-2));box-shadow:0 6px 18px rgba(2,6,23,0.6);
+
+    /* container */
+    .wrap{
+      max-width:var(--max-width);
+      margin:28px auto;
+      padding:28px;
+      display:grid;
+      grid-template-columns: 360px 1fr;
+      gap:28px;
+      align-items:start;
     }
-    .brand h1{font-size:18px;margin:0}
-    .brand p{margin:0;color:var(--muted);font-size:13px}
-
-    nav{display:flex;gap:12px;align-items:center}
-    nav a{color:var(--muted);text-decoration:none;padding:8px 12px;border-radius:8px;font-size:14px}
-    nav a:hover, nav a:focus{color:var(--text);background:var(--glass)}
-
-    .actions{display:flex;gap:12px;align-items:center}
-    .btn{display:inline-flex;gap:8px;align-items:center;padding:10px 14px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);cursor:pointer;text-decoration:none;color:var(--text);font-weight:600}
-    .btn.ghost{background:transparent;border:1px dashed rgba(255,255,255,0.04);font-weight:600}
-
-    /* -------------------- HERO -------------------- */
-    .hero{display:grid;grid-template-columns:1fr 340px;gap:28px;align-items:center;padding:28px 0}
-    .intro{padding-right:8px}
-    .kicker{display:inline-block;padding:6px 10px;border-radius:999px;background:linear-gradient(90deg, rgba(79,70,229,0.14), rgba(6,182,212,0.12));color:var(--accent);font-weight:700;font-size:12px}
-    h2{font-size:28px;margin:12px 0 6px}
-    h3{font-size:18px;margin:0;color:var(--muted)}
-    p.lead{margin:12px 0 18px;color:var(--muted);max-width:70%}
-
-    .profile-card{background:linear-gradient(180deg,var(--card), color-mix(in srgb,var(--card) 90%, transparent));border-radius:14px;padding:18px;box-shadow:0 10px 30px rgba(2,6,23,0.6);}
-    .avatar{width:100%;display:flex;flex-direction:column;align-items:center;text-align:center}
-    .avatar img{width:160px;height:160px;border-radius:20px;object-fit:cover;border:6px solid linear-gradient(180deg, rgba(255,255,255,0.03), transparent);box-shadow:0 8px 24px rgba(2,6,23,0.6)}
-    .meta{margin-top:14px}
-    .meta h4{margin:6px 0 0}
-    .meta p{margin:6px 0;color:var(--muted);font-size:13px}
-
-    /* -------------------- STATS -------------------- */
-    .stats{display:flex;gap:14px;margin-top:14px}
-    .stat{background:var(--glass-2);padding:10px;border-radius:10px;flex:1;text-align:center}
-    .stat h5{margin:0;font-size:20px}
-    .stat p{margin:4px 0 0;color:var(--muted);font-size:12px}
-
-    /* -------------------- SECTIONS -------------------- */
-    section{padding:20px 0;border-top:1px dashed rgba(255,255,255,0.02)}
-    section .section-title{display:flex;align-items:center;justify-content:space-between;gap:12px}
-    .section-title h3{margin:0}
-    .grid{display:grid;gap:16px}
-
-    /* skills */
-    .skills-grid{display:flex;flex-wrap:wrap;gap:10px}
-    .chip{padding:8px 12px;border-radius:999px;background:linear-gradient(90deg, rgba(255,255,255,0.02), transparent);border:1px solid rgba(255,255,255,0.03);font-weight:600;font-size:13px;color:var(--muted)}
-
-    /* projects */
-    .projects-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-    .card{background:var(--card);padding:16px;border-radius:12px;box-shadow:0 6px 20px rgba(2,6,23,0.5);border:1px solid rgba(255,255,255,0.02)}
-    .card h4{margin:0 0 8px}
-    .card p{margin:0 0 12px;color:var(--muted)}
-    .card .tags{display:flex;gap:8px;flex-wrap:wrap}
-    .tag{padding:6px 8px;border-radius:8px;font-size:12px;background:rgba(255,255,255,0.02);color:var(--muted)}
-    .card img{width:100%;height:140px;object-fit:cover;border-radius:8px;margin-bottom:10px}
-
-    /* modal */
-    .modal-backdrop{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:linear-gradient(180deg, rgba(2,6,23,0.6), rgba(2,6,23,0.8));z-index:50}
-    .modal{width:min(920px,95%);background:var(--card);border-radius:12px;padding:20px;box-shadow:0 30px 80px rgba(2,6,23,0.8)}
-    .modal .close{float:right;cursor:pointer}
-
-    /* timeline */
-    .timeline{border-left:3px solid rgba(255,255,255,0.03);padding-left:18px}
-    .timeline-item{margin-bottom:22px}
-    .timeline-item h5{margin:0}
-    .timeline-item p{margin:6px 0;color:var(--muted)}
-
-    /* contact */
-    .contact-grid{display:grid;grid-template-columns:1fr 360px;gap:20px}
-    form{display:flex;flex-direction:column;gap:12px}
-    input[type='text'],input[type='email'],textarea{padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:var(--text)}
-    textarea{min-height:140px;resize:vertical}
-    .small{font-size:13px;color:var(--muted)}
-
-    /* footer */
-    footer{padding:18px 0;text-align:center;color:var(--muted);font-size:13px}
 
     /* responsive */
-    @media (max-width:1000px){
-      .projects-grid{grid-template-columns:repeat(2,1fr)}
-      .hero{grid-template-columns:1fr 300px}
-      .contact-grid{grid-template-columns:1fr}
+    @media (max-width: 980px){
+      .wrap{grid-template-columns:1fr; padding:20px}
     }
-    @media (max-width:700px){
-      .projects-grid{grid-template-columns:1fr}
-      .hero{grid-template-columns:1fr}
-      .profile-card{margin-top:12px}
-      nav{display:none}
+
+    /* Sidebar card (left) */
+    .card{
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), var(--glass));
+      border:1px solid var(--glass-border);
+      border-radius:var(--radius);
+      padding:22px;
+      box-shadow:var(--shadow);
+      overflow:hidden;
+      position:relative;
+      backdrop-filter: blur(6px) saturate(120%);
     }
+
+    .profile {
+      display:flex;
+      gap:18px;
+      align-items:center;
+    }
+    .brand {
+      width:72px;
+      height:72px;
+      display:grid;
+      place-items:center;
+      border-radius:14px;
+      font-weight:700;
+      font-size:20px;
+      background:linear-gradient(135deg,var(--accent),var(--accent-2));
+      color:white;
+      flex-shrink:0;
+      letter-spacing:0.06em;
+    }
+
+    .avatar {
+      width:86px;
+      height:86px;
+      border-radius:14px;
+      overflow:hidden;
+      background:linear-gradient(180deg, rgba(0,0,0,0.12), rgba(255,255,255,0.02));
+      border:1px solid var(--glass-border);
+      display:block;
+      flex-shrink:0;
+    }
+    .avatar img{width:100%;height:100%;object-fit:cover;display:block}
+
+    .name {
+      font-size:18px;
+      font-weight:700;
+      margin:0;
+      letter-spacing:0.01em;
+    }
+    .role {
+      font-size:13px;
+      color:var(--muted);
+      margin-top:6px;
+    }
+
+    .contact-list{margin-top:18px;display:flex;flex-direction:column;gap:8px}
+    .contact-item{
+      display:flex;align-items:center;gap:10px;padding:8px;border-radius:10px;
+      background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);
+      border:1px solid var(--glass-2);
+      font-size:13px;
+      color:var(--muted);
+    }
+    .contact-item strong{color:var(--text);font-weight:600}
+
+    .chip{
+      padding:6px 10px;border-radius:999px;border:1px solid var(--glass-border);
+      font-size:12px;background:transparent;color:var(--muted);
+    }
+
+    .skills {margin-top:18px}
+    .skills h4{margin:0 0 8px 0;font-size:13px}
+    .skill-list{display:flex;flex-wrap:wrap;gap:8px}
+    .skill{background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent); padding:8px 10px;border-radius:10px;font-size:12px;color:var(--muted);border:1px solid var(--glass-border)}
+
+    .download-resume{
+      margin-top:16px;display:flex;gap:10px;align-items:center;
+    }
+    .btn {
+      display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:10px;border:0;cursor:pointer;
+      background:linear-gradient(90deg,var(--accent),var(--accent-2));
+      color:white;font-weight:600;font-size:13px;box-shadow:0 8px 24px rgba(12,18,36,0.35);
+      transition:transform 220ms ease, box-shadow 220ms ease;
+    }
+    .btn:active{transform:translateY(1px)}
+    .btn-ghost {
+      background:transparent;border:1px solid var(--glass-border);color:var(--text);font-weight:600;padding:10px 12px;border-radius:10px;
+    }
+
+    /* main content (right) */
+    .main{
+      display:flex;flex-direction:column;gap:20px;
+    }
+
+    /* header area */
+    .hero{
+      padding:18px 22px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);border:1px solid var(--glass-border);
+      display:flex;align-items:center;justify-content:space-between;gap:20px;
+    }
+    .hero-left h1{margin:0;font-size:20px}
+    .hero-left p{margin:6px 0 0;color:var(--muted);font-size:14px}
+    .meta-tags{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+    .meta-tag{background:var(--panel);padding:6px 10px;border-radius:999px;font-size:12px;border:1px solid var(--glass-border);color:var(--muted)}
+
+    /* sections */
+    section{background:transparent;border-radius:12px;padding:18px;border:1px solid var(--glass-border)}
+    .section-title{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px}
+    .section-title h3{margin:0;font-size:16px}
+    .section-sub{color:var(--muted);font-size:13px;margin-top:6px}
+
+    /* projects grid */
+    .projects-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+    @media (max-width:720px){.projects-grid{grid-template-columns:1fr}}
+    .project {
+      border-radius:12px;padding:14px;background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);
+      border:1px solid var(--glass-border);display:flex;flex-direction:column;gap:10px;
+    }
+    .project h4{margin:0;font-size:14px}
+    .project .meta{font-size:12px;color:var(--muted)}
+    .project .proj-actions{display:flex;gap:8px;margin-top:auto}
+
+    /* timeline / education list */
+    .timeline{display:flex;flex-direction:column;gap:12px}
+    .timeline-item{display:flex;gap:12px;align-items:flex-start}
+    .timeline-icon{width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:grid;place-items:center;color:white}
+
+    /* skills bars */
+    .skill-bar{display:flex;flex-direction:column;gap:6px}
+    .skill-title{display:flex;justify-content:space-between;font-size:13px;color:var(--muted)}
+    .bar{height:10px;border-radius:8px;background:linear-gradient(90deg, rgba(255,255,255,0.02), transparent);border:1px solid var(--glass-border);overflow:hidden}
+    .bar > i{display:block;height:100%;background:linear-gradient(90deg,var(--accent),var(--accent-2));width:40%}
+
+    /* contact form */
+    .form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    @media (max-width:720px){.form-row{grid-template-columns:1fr}}
+    input, textarea{
+      width:100%;padding:12px;border-radius:10px;border:1px solid var(--glass-border);background:transparent;color:var(--text);
+      outline:none;font-size:13px;
+    }
+    textarea{min-height:120px;resize:vertical}
+    .form-help{font-size:12px;color:var(--muted);margin-top:8px}
+
+    /* footer */
+    footer{display:flex;justify-content:space-between;align-items:center;padding:14px 0;color:var(--muted);font-size:13px}
 
     /* small utilities */
+    .kbd{padding:6px 8px;border-radius:6px;background:rgba(255,255,255,0.03);border:1px solid var(--glass-border);font-size:12px;color:var(--muted)}
+    .tag{display:inline-block;padding:6px 10px;border-radius:999px;background:transparent;border:1px solid var(--glass-border);font-size:12px;color:var(--muted)}
+
+    /* floating theme toggle */
+    .theme-toggle{
+      position:fixed;right:22px;bottom:22px;width:56px;height:56px;border-radius:14px;display:grid;place-items:center;box-shadow:var(--shadow);z-index:9999;
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);border:1px solid var(--glass-border);cursor:pointer;
+    }
+    .sr-only{position:absolute!important;height:1px;width:1px;overflow:hidden;clip:rect(1px,1px,1px,1px);white-space:nowrap}
+
+    /* little responsive tweaks */
+    .small{font-size:12px;color:var(--muted)}
+
+    /* project badges */
+    .badge{
+      padding:6px 8px;border-radius:8px;background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);border:1px solid var(--glass-border);font-size:12px;color:var(--muted);
+    }
+
+    /* project screenshots placeholder */
+    .screenshot{
+      height:140px;border-radius:8px;background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);border:1px solid var(--glass-border);display:grid;place-items:center;color:var(--muted);font-size:13px;
+    }
+
+    /* modal */
+    .modal-backdrop{position:fixed;inset:0;background:rgba(2,6,23,0.6);display:none;place-items:center;z-index:9998}
+    .modal{width:90%;max-width:900px;background:var(--panel);border-radius:14px;padding:18px;border:1px solid var(--glass-border)}
+    .modal.show{display:grid}
+
+    /* tiny util */
     .muted{color:var(--muted)}
-    .kbd{padding:6px 8px;border-radius:6px;border:1px solid rgba(255,255,255,0.04);background:var(--glass);font-weight:700}
+    a{color:inherit;text-decoration:none}
+    a.action {color:var(--accent);font-weight:700}
 
-    /* accessibility focus */
-    a:focus, button:focus, input:focus{outline:3px solid color-mix(in srgb, var(--accent) 30%, transparent);outline-offset:3px}
-
-    /* animated underline for links */
-    .underline{position:relative}
-    .underline::after{content:'';position:absolute;left:0;bottom:-2px;width:0;height:3px;border-radius:4px;background:linear-gradient(90deg,var(--accent),var(--accent-2));transition:width .28s}
-    .underline:hover::after{width:100%}
-
-    /* large hero decoration */
-    .hero-deco{position:absolute;right:-80px;top:-40px;opacity:.08;transform:rotate(15deg);font-size:220px;user-select:none}
-
-    /* resume button */
-    .download-resume{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:10px;background:linear-gradient(90deg,var(--accent),var(--accent-2));color:white;font-weight:700}
-
+    /* animations */
+    .fade-up{transform:translateY(8px);opacity:0;transition:opacity 420ms var(--transition), transform 420ms var(--transition)}
+    .reveal{transform:none;opacity:1}
   </style>
 </head>
 <body>
-  <div class="container" role="main">
-    <header>
-      <div class="brand">
-        <div class="logo" aria-hidden="true">AGR</div>
+  <!-- THEME NOTE:
+       This HTML uses CSS variables and will set theme class "light" on <html> when user toggles.
+       By default it loads dark (no class). JS below manages persisted preference.
+  -->
+
+  <!-- THEME TOGGLE BUTTON (FLOATING) -->
+  <button class="theme-toggle" aria-label="Toggle theme" id="themeToggle" title="Toggle light / dark theme (T)">
+    <svg id="themeIcon" width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" fill="currentColor"/>
+    </svg>
+    <span class="sr-only">Toggle theme</span>
+  </button>
+
+  <main class="wrap" id="pageWrap" role="main">
+    <!-- LEFT COLUMN (PROFILE) -->
+    <aside class="card" aria-labelledby="profileHeading">
+      <div class="profile">
         <div>
-          <h1>Muhammad Azam</h1>
-          <p>BS Software Engineering • Aspiring Full Stack Developer</p>
+          <div class="brand" aria-hidden="true">AGR</div>
+        </div>
+        <div style="flex:1">
+          <div style="display:flex;gap:12px;align-items:center">
+            <div class="avatar" aria-hidden="true">
+              <!-- Replace src with your actual profile picture path: assets/profile.jpg -->
+              <img src="assets/profile.jpg" alt="Muhammad Azam — Profile Photo (replace assets/profile.jpg)" onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 200 200%22><rect width=%22200%22 height=%22200%22 fill=%22%230e76a8%22/><text x=%22100%22 y=%22110%22 font-size=%2236%22 text-anchor=%22middle%22 fill=%22white%22 font-family=%22Arial%22>AZ</text></svg>';">
+            </div>
+            <div>
+              <h2 id="profileHeading" class="name">Muhammad Azam</h2>
+              <div class="role">BS Software Engineering • Aspiring Full Stack Developer</div>
+            </div>
+          </div>
         </div>
       </div>
 
-      <nav aria-label="Main navigation">
-        <a href="#about">About</a>
-        <a href="#skills">Skills</a>
-        <a href="#projects">Projects</a>
-        <a href="#experience">Experience</a>
-        <a href="#education">Education</a>
-        <a href="#contact">Contact</a>
-      </nav>
+      <!-- contact -->
+      <div class="contact-list" role="list" aria-label="Contact information">
+        <div class="contact-item" role="listitem">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 5a2 2 0 0 1 2-2h4l2 2h6a2 2 0 0 1 2 2v3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <div><strong>Location</strong><div class="small muted">Shah Inayat Colony, Khara Road, Kasur</div></div>
+        </div>
 
-      <div class="actions">
-        <button class="btn ghost" id="themeToggle" aria-pressed="false" title="Toggle dark / light theme">🌙</button>
-        <a class="btn" href="#contact">Hire Me</a>
-        <a class="btn" id="downloadResume" href="assets/Muhammad-Azam-Resume.pdf" download>📄 Resume</a>
+        <div class="contact-item" role="listitem">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M22 16.92V21a1 1 0 0 1-1.09 1A19 19 0 0 1 3 5.09 1 1 0 0 1 4 4h4.09a1 1 0 0 1 1 .75c.12.66.42 1.59.83 2.5a1 1 0 0 1-.24 1.02l-1.27 1.27a16 16 0 0 0 6.58 6.58l1.27-1.27a1 1 0 0 1 1.02-.24c.91.41 1.84.71 2.5.83a1 1 0 0 1 .75 1V22z" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <div><strong>Phone</strong><div class="small muted">+92 325683058</div></div>
+        </div>
+
+        <div class="contact-item" role="listitem">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M22 12a10 10 0 1 1-20 0 10 10 0 0 1 20 0z" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/><path d="M12.5 7.5h-5v9h9v-5" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <div><strong>Email</strong>
+            <div style="display:flex;gap:8px;align-items:center">
+              <span class="small muted" id="emailText">azamghafoorreal@gmail.com</span>
+              <button class="btn-ghost" id="copyEmailBtn" title="Copy email to clipboard" style="padding:6px 8px;font-size:12px">Copy</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-item" role="listitem" aria-hidden="false">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M14 4h6v6" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 4L10 14" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <div><strong>Links</strong>
+            <div class="small muted" style="display:flex;flex-direction:column">
+              <a href="https://github.com/azamagr" target="_blank" rel="noopener" class="muted">github.com/azamagr</a>
+              <a href="https://linkedin.com/in/azamagr" target="_blank" rel="noopener" class="muted">linkedin.com/in/azamagr</a>
+            </div>
+          </div>
+        </div>
       </div>
-    </header>
 
-    <main>
-      <!-- HERO -->
-      <section class="hero" aria-labelledby="intro-heading">
-        <div class="intro">
-          <span class="kicker">BSSE • Full Stack</span>
-          <h2 id="intro-heading">Muhammad Azam — Aspiring Full Stack Developer</h2>
-          <h3 class="muted">React.js • Laravel • MongoDB • UI/UX-minded</h3>
-          <p class="lead">I build responsive, accessible, and maintainable web applications. Currently focused on backend APIs, full-stack integrations, and improving UI/UX practices. Available for internships and junior roles.</p>
+      <!-- skills -->
+      <div class="skills">
+        <h4>Skills</h4>
+        <div class="skill-list" aria-hidden="false">
+          <div class="skill">React.js</div>
+          <div class="skill">Laravel</div>
+          <div class="skill">MongoDB</div>
+          <div class="skill">JavaScript</div>
+          <div class="skill">HTML & CSS</div>
+          <div class="skill">Bootstrap</div>
+          <div class="skill">Node.js</div>
+          <div class="skill">MySQL</div>
+          <div class="skill">WordPress</div>
+        </div>
+      </div>
 
-          <div style="display:flex;gap:10px;align-items:center;margin-top:14px">
-            <a class="download-resume" href="assets/Muhammad-Azam-Resume.pdf" download>Download Resume</a>
-            <a class="btn ghost" href="#projects">View Projects</a>
-          </div>
+      <div class="download-resume">
+        <a class="btn" id="downloadResume" href="assets/Muhammad-Azam-Resume.pdf" download>
+          <!-- download icon -->
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3v12" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 11l4 4 4-4" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M21 21H3" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Download Resume
+        </a>
+        <button class="btn-ghost" id="themeQuick" title="Toggle theme (T)">Theme</button>
+      </div>
 
-          <div style="margin-top:18px;display:flex;gap:12px;align-items:center">
-            <div class="kbd">Location</div>
-            <div class="muted">Kasur, Pakistan</div>
-            <div class="kbd">Email</div>
-            <div class="muted">azamghafoorreal@gmail.com</div>
-          </div>
+      <div style="margin-top:16px" class="small muted">Tip: Press <span class="kbd">T</span> to toggle theme • Press <span class="kbd">R</span> to download resume</div>
+    </aside>
 
-          <div style="margin-top:18px;display:flex;gap:12px;align-items:center">
-            <a class="underline muted" href="https://linkedin.com/in/azamagr">LinkedIn</a>
-            <a class="underline muted" href="https://github.com/azamagr">GitHub</a>
-            <a class="underline muted" href="#contact">Contact</a>
+    <!-- RIGHT COLUMN (MAIN CONTENT) -->
+    <section class="main" aria-labelledby="mainHeading">
+      <div class="hero" role="region" aria-label="Introduction">
+        <div class="hero-left">
+          <h1 class="fade-up reveal">Hello — I'm <strong>Muhammad Azam</strong></h1>
+          <p class="muted fade-up reveal" style="transition-delay:80ms">BSSE student at Virtual University of Pakistan • Aspiring Full Stack Developer (React, Laravel, MongoDB)</p>
+          <div class="meta-tags" style="margin-top:10px">
+            <div class="meta-tag">7th Semester</div>
+            <div class="meta-tag">React • Laravel • MongoDB</div>
+            <div class="meta-tag">Open to Internships (Lahore)</div>
           </div>
         </div>
 
-        <aside class="profile-card" aria-label="Profile card">
-          <div class="avatar">
-              <!-- Replace the src with your actual Facebook image URL -->
-              <img id="profileImg" 
-                   src="https://scontent.fkhi11-1.fna.fbcdn.net/v/t39.30808-6/462967085_762800658937906_1702556294519532363_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeHD5vxgM-CUt8bGi5bCzBAcOIk8n1SyFEO4PKts6n2FfrkC6LsqYqGBoT6MIizADd4zOxwCe_JqfXn6b2GvVNXQ&_nc_ohc=xmv4gZrJwN4Q7kNvgGr6gXQ&_nc_zt=23&_nc_ht=scontent.fkhi11-1.fna&_nc_gid=AzHg89hETZtsUv2EYcN4mS5&oh=00_AYB7MCkK4RSCiqmEOscA0pCnq-ZG0Y6o1cBkgQkoIt9pnA&oe=671A3C95" 
-                   alt="Muhammad Azam Profile" />
-              <div class="meta">
-              <h4>Mohammad Azam</h4>
-              <p class="muted">BSSE Student @ Virtual University of Pakistan</p>
+        <div style="display:flex;gap:12px;align-items:center">
+          <a class="btn" href="#projects">View Projects</a>
+          <a class="btn-ghost" href="mailto:azamghafoorreal@gmail.com?subject=Hi%20Muhammad%20Azam">Contact</a>
+        </div>
+      </div>
 
-              <div class="stats" role="list">
-                <div class="stat" role="listitem"><h5>7th</h5><p class="muted">Semester</p></div>
-                <div class="stat" role="listitem"><h5>React</h5><p class="muted">Primary Stack</p></div>
-                <div class="stat" role="listitem"><h5>Open</h5><p class="muted">To internships</p></div>
-              </div>
-            </div>
-          </div>
-        </aside>
-      </section>
-
-      <!-- ABOUT -->
-      <section id="about" aria-labelledby="about-heading">
+      <!-- Projects Section -->
+      <section id="projects" aria-labelledby="projectsHeading" class="fade-up reveal" style="min-height:320px">
         <div class="section-title">
-          <h3 id="about-heading">About</h3>
-          <div class="muted">Concise summary & strengths</div>
+          <h3 id="projectsHeading">Selected Projects</h3>
+          <div class="small muted">Frontend & Backend • Click a project for details</div>
         </div>
 
-        <div class="grid" style="margin-top:14px;gap:16px;grid-template-columns:1fr 360px;align-items:start">
-          <div>
-            <p>I am a proactive software engineering student with hands-on experience building front-end and back-end projects. I focus on creating clean, accessible interfaces and robust server-side logic. My coursework and projects cover Data Structures, OOP, Database Management, Computer Networks, and Software Engineering principles.</p>
-
-            <h4 style="margin-top:16px">Core strengths</h4>
-            <ul>
-              <li>Problem-solving & algorithmic thinking</li>
-              <li>Component-driven UI with React</li>
-              <li>RESTful API design with Node & Laravel</li>
-              <li>Practical DB modeling (MongoDB & MySQL)</li>
-              <li>Responsive, accessible UI design</li>
-            </ul>
-
-            <h4 style="margin-top:16px">Quick facts</h4>
-            <div style="display:flex;gap:12px;flex-wrap:wrap">
-              <div class="chip">BSSE @ Virtual University</div>
-              <div class="chip">CGPA: 2.02 / 4.00</div>
-              <div class="chip">Languages: EN/UR/PNJ</div>
-              <div class="chip">Hobbies: Cricket, Badminton, Ludo</div>
-            </div>
-          </div>
-
-          <aside style="background:var(--glass);padding:16px;border-radius:12px;">
-            <h4>Contact</h4>
-            <p class="muted">Email: <a href="mailto:azamghafoorreal@gmail.com">azamghafoorreal@gmail.com</a></p>
-            <p class="muted">Phone: +92-325-683058 (update if needed)</p>
-            <p class="muted">Location: Shah Inayat Colony, Khara Road, Kasur</p>
-            <p style="margin-top:10px"><a class="btn" href="https://linkedin.com/in/azamagr">Visit LinkedIn</a></p>
-          </aside>
-        </div>
-      </section>
-
-      <!-- SKILLS -->
-      <section id="skills" aria-labelledby="skills-heading">
-        <div class="section-title">
-          <h3 id="skills-heading">Skills</h3>
-          <div class="muted">Technologies & tools I use</div>
-        </div>
-
-        <div style="margin-top:12px">
-          <div class="skills-grid" aria-hidden="false">
-            <!-- Frontend -->
-            <div style="flex:1;min-width:220px">
-              <h4>Frontend</h4>
-              <div class="chip">HTML5</div>
-              <div class="chip">CSS3</div>
-              <div class="chip">Bootstrap</div>
-              <div class="chip">JavaScript</div>
-              <div class="chip">React.js</div>
-            </div>
-
-            <!-- Backend -->
-            <div style="flex:1;min-width:220px">
-              <h4>Backend</h4>
-              <div class="chip">PHP</div>
-              <div class="chip">Laravel</div>
-              <div class="chip">Node.js</div>
-              <div class="chip">Express.js</div>
-            </div>
-
-            <!-- Databases -->
-            <div style="flex:1;min-width:220px">
-              <h4>Databases</h4>
-              <div class="chip">MongoDB</div>
-              <div class="chip">MySQL</div>
-            </div>
-
-            <!-- Other -->
-            <div style="flex:1;min-width:220px">
-              <h4>Tools</h4>
-              <div class="chip">Git & GitHub</div>
-              <div class="chip">VS Code</div>
-              <div class="chip">WordPress</div>
-              <div class="chip">VirtualBox</div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- PROJECTS -->
-      <section id="projects" aria-labelledby="projects-heading">
-        <div class="section-title">
-          <h3 id="projects-heading">Selected Projects</h3>
-          <div class="muted">Click any project to view details</div>
-        </div>
-
-        <div class="projects-grid" style="margin-top:12px">
-          <!-- Repeatable project card pattern -->
-
-          <!-- Project 1 -->
-          <article class="card" tabindex="0" data-project="1">
-            <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='1200' height='800'><rect fill='%2310121B' width='100%25' height='100%25'/><text x='50%25' y='50%25' fill='%23ffffff' font-family='Arial' font-size='36' text-anchor='middle' dominant-baseline='central'>BAROQUE Clothing Store (Preview)</text></svg>" alt="BAROQUE Clothing Store preview"/>
-            <h4>BAROQUE Clothing Store</h4>
-            <p>Responsive 5-page front-end eCommerce mockup focusing on product layout and brand styling.</p>
-            <div class="tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">Responsive</span></div>
-            <div style="margin-top:12px;display:flex;gap:8px">
-              <button class="btn" data-open="1">View</button>
-              <a class="btn ghost" href="projects/baroque-store/index.html" target="_blank" rel="noopener">Source</a>
+        <div class="projects-grid" id="projectsGrid">
+          <!-- Project Card 1 -->
+          <article class="project" tabindex="0" role="article" aria-label="BAROQUE Clothing Store (Front-End)">
+            <div class="screenshot" aria-hidden="true">Screenshot / Demo</div>
+            <h4>BAROQUE Clothing Store — Front-End</h4>
+            <div class="meta">HTML • CSS • Responsive Design</div>
+            <p class="small muted">A 5-page responsive e-commerce front-end inspired by BAROQUE clothing. Focus on pixel-perfect layout and product showcase.</p>
+            <div class="proj-actions">
+              <button class="btn" data-project="baroque">Details</button>
+              <a class="btn-ghost" href="#" title="Live demo (replace link)" onclick="alert('Add live demo URL in repo')">Live</a>
             </div>
           </article>
 
-          <!-- Project 2 -->
-          <article class="card" tabindex="0" data-project="2">
-            <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='1200' height='800'><rect fill='%230f1724' width='100%25' height='100%25'/><text x='50%25' y='50%25' fill='%23ffffff' font-family='Arial' font-size='36' text-anchor='middle' dominant-baseline='central'>Education Website (Preview)</text></svg>" alt="Education website preview"/>
+          <!-- Project Card 2 -->
+          <article class="project" tabindex="0" role="article" aria-label="Education Website">
+            <div class="screenshot" aria-hidden="true">Screenshot / Demo</div>
             <h4>Education Website</h4>
-            <p>Multi-page site template for courses and resources. Accessibility and semantic HTML emphasized.</p>
-            <div class="tags"><span class="tag">HTML</span><span class="tag">CSS</span></div>
-            <div style="margin-top:12px;display:flex;gap:8px">
-              <button class="btn" data-open="2">View</button>
-              <a class="btn ghost" href="projects/education-website/index.html" target="_blank" rel="noopener">Source</a>
+            <div class="meta">HTML • CSS • Accessibility</div>
+            <p class="small muted">Multi-page educational platform with structured courses, navigation, and accessible markup (in progress).</p>
+            <div class="proj-actions">
+              <button class="btn" data-project="education">Details</button>
+              <a class="btn-ghost" href="#" onclick="alert('Add live demo URL in repo')">Live</a>
             </div>
           </article>
 
-          <!-- Project 3 -->
-          <article class="card" tabindex="0" data-project="3">
-            <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='1200' height='800'><rect fill='%230b1220' width='100%25' height='100%25'/><text x='50%25' y='50%25' fill='%23ffffff' font-family='Arial' font-size='36' text-anchor='middle' dominant-baseline='central'>J. Clothing Store</text></svg>" alt="J. Clothing Store preview"/>
+          <!-- Project Card 3 -->
+          <article class="project" tabindex="0" role="article" aria-label="J. Clothing Store">
+            <div class="screenshot" aria-hidden="true">Screenshot / Demo</div>
             <h4>J. Clothing Store</h4>
-            <p>Modern, responsive store front-end built with Bootstrap and custom JS for interactivity.</p>
-            <div class="tags"><span class="tag">HTML</span><span class="tag">Bootstrap</span><span class="tag">JavaScript</span></div>
-            <div style="margin-top:12px;display:flex;gap:8px">
-              <button class="btn" data-open="3">View</button>
-              <a class="btn ghost" href="projects/j-store/index.html" target="_blank" rel="noopener">Source</a>
+            <div class="meta">HTML • CSS • Bootstrap • JavaScript</div>
+            <p class="small muted">Modern store front-end with interactive components and mobile-first design (in progress).</p>
+            <div class="proj-actions">
+              <button class="btn" data-project="jstore">Details</button>
+              <a class="btn-ghost" href="#" onclick="alert('Add live demo URL in repo')">Live</a>
             </div>
           </article>
 
-          <!-- Project 4 -->
-          <article class="card" tabindex="0" data-project="4">
-            <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='1200' height='800'><rect fill='%2310212A' width='100%25' height='100%25'/><text x='50%25' y='50%25' fill='%23ffffff' font-family='Arial' font-size='36' text-anchor='middle' dominant-baseline='central'>MongoDB API</text></svg>" alt="MongoDB API preview"/>
+          <!-- Project Card 4 -->
+          <article class="project" tabindex="0" role="article" aria-label="MongoDB API">
+            <div class="screenshot" aria-hidden="true">API Demo</div>
             <h4>MongoDB API Development</h4>
-            <p>RESTful API demonstrating CRUD operations and proper response patterns with MongoDB.</p>
-            <div class="tags"><span class="tag">Node.js</span><span class="tag">Express</span><span class="tag">MongoDB</span></div>
-            <div style="margin-top:12px;display:flex;gap:8px">
-              <button class="btn" data-open="4">View</button>
-              <a class="btn ghost" href="backend/mongo-api" target="_blank" rel="noopener">Source</a>
+            <div class="meta">Node.js • Express • MongoDB</div>
+            <p class="small muted">RESTful API for CRUD operations with structured routes and Postman collection for testing.</p>
+            <div class="proj-actions">
+              <button class="btn" data-project="mongoapi">Details</button>
+              <a class="btn-ghost" href="#" onclick="alert('Add repository link for backend')">Repo</a>
             </div>
           </article>
 
-          <!-- Project 5 -->
-          <article class="card" tabindex="0" data-project="5">
-            <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='1200' height='800'><rect fill='%230E1B2A' width='100%25' height='100%25'/><text x='50%25' y='50%25' fill='%23ffffff' font-family='Arial' font-size='36' text-anchor='middle' dominant-baseline='central'>Chat-box App</text></svg>" alt="Chat-box preview"/>
+          <!-- Project Card 5 -->
+          <article class="project" tabindex="0" role="article" aria-label="Chat-box Application">
+            <div class="screenshot" aria-hidden="true">UI Demo</div>
             <h4>Chat-box Application</h4>
-            <p>Interactive chat UI demonstrating DOM manipulation, event handling, and UI state.</p>
-            <div class="tags"><span class="tag">HTML</span><span class="tag">jQuery</span></div>
-            <div style="margin-top:12px;display:flex;gap:8px">
-              <button class="btn" data-open="5">View</button>
-              <a class="btn ghost" href="projects/chat-box/index.html" target="_blank" rel="noopener">Source</a>
+            <div class="meta">HTML • jQuery</div>
+            <p class="small muted">Interactive chat-box UI demonstrating DOM manipulation and event-driven logic (in progress).</p>
+            <div class="proj-actions">
+              <button class="btn" data-project="chatbox">Details</button>
+              <a class="btn-ghost" href="#" onclick="alert('Add project link')">Repo</a>
             </div>
           </article>
 
-          <!-- Project 6 (Home page) -->
-          <article class="card" tabindex="0" data-project="6">
-            <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='1200' height='800'><rect fill='%230D1622' width='100%25' height='100%25'/><text x='50%25' y='50%25' fill='%23ffffff' font-family='Arial' font-size='36' text-anchor='middle' dominant-baseline='central'>Home Page (GCU Lahore)</text></svg>" alt="Home page preview"/>
-            <h4>Home Page — GCU Lahore</h4>
-            <p>Landing page mockup focused on layout, hero, and semantic HTML structure.</p>
-            <div class="tags"><span class="tag">HTML</span></div>
-            <div style="margin-top:12px;display:flex;gap:8px">
-              <button class="btn" data-open="6">View</button>
-              <a class="btn ghost" href="projects/home-page-gcu/index.html" target="_blank" rel="noopener">Source</a>
+          <!-- Project Card 6 -->
+          <article class="project" tabindex="0" role="article" aria-label="Home Page GCU Lahore">
+            <div class="screenshot" aria-hidden="true">Mockup</div>
+            <h4>Home Page (GCU Lahore)</h4>
+            <div class="meta">HTML • Semantic Markup</div>
+            <p class="small muted">A static landing page for GCU Lahore with semantically structured content and clean layout.</p>
+            <div class="proj-actions">
+              <button class="btn" data-project="gcu">Details</button>
+              <a class="btn-ghost" href="#" onclick="alert('Add demo or repo link')">Repo</a>
             </div>
           </article>
-
-          <!-- Extra sample projects to create depth -->
-          <article class="card" tabindex="0" data-project="7">
-            <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='1200' height='800'><rect fill='%2312261F' width='100%25' height='100%25'/><text x='50%25' y='50%25' fill='%23ffffff' font-family='Arial' font-size='36' text-anchor='middle' dominant-baseline='central'>Utilities & Templates</text></svg>" alt="Utilities preview"/>
-            <h4>Utilities & Templates</h4>
-            <p>Small tools and HTML/CSS templates for rapid prototyping.</p>
-            <div class="tags"><span class="tag">HTML</span><span class="tag">CSS</span></div>
-            <div style="margin-top:12px;display:flex;gap:8px">
-              <button class="btn" data-open="7">View</button>
-              <a class="btn ghost" href="#" target="_blank" rel="noopener">Source</a>
-            </div>
-          </article>
-
-          <article class="card" tabindex="0" data-project="8">
-            <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='1200' height='800'><rect fill='%230B2233' width='100%25' height='100%25'/><text x='50%25' y='50%25' fill='%23ffffff' font-family='Arial' font-size='36' text-anchor='middle' dominant-baseline='central'>Project Template</text></svg>" alt="Project template preview"/>
-            <h4>Project Template</h4>
-            <p>A clean starter template for rapid project setups.</p>
-            <div class="tags"><span class="tag">Template</span></div>
-            <div style="margin-top:12px;display:flex;gap:8px">
-              <button class="btn" data-open="8">View</button>
-              <a class="btn ghost" href="#" target="_blank" rel="noopener">Source</a>
-            </div>
-          </article>
-
-          <article class="card" tabindex="0" data-project="9">
-            <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='1200' height='800'><rect fill='%2312272A' width='100%25' height='100%25'/><text x='50%25' y='50%25' fill='%23ffffff' font-family='Arial' font-size='36' text-anchor='middle' dominant-baseline='central'>API Integrations</text></svg>" alt="API Integrations preview"/>
-            <h4>API Integrations</h4>
-            <p>Sample integrations with third-party APIs and data parsing utilities.</p>
-            <div class="tags"><span class="tag">API</span><span class="tag">Node</span></div>
-            <div style="margin-top:12px;display:flex;gap:8px">
-              <button class="btn" data-open="9">View</button>
-              <a class="btn ghost" href="#" target="_blank" rel="noopener">Source</a>
-            </div>
-          </article>
-
-          <article class="card" tabindex="0" data-project="10">
-            <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='1200' height='800'><rect fill='%230D2633' width='100%25' height='100%25'/><text x='50%25' y='50%25' fill='%23ffffff' font-family='Arial' font-size='36' text-anchor='middle' dominant-baseline='central'>Misc Demos</text></svg>" alt="Misc demos preview"/>
-            <h4>Misc Demos</h4>
-            <p>Various small demos and experimentations to explore new ideas.</p>
-            <div class="tags"><span class="tag">Demo</span></div>
-            <div style="margin-top:12px;display:flex;gap:8px">
-              <button class="btn" data-open="10">View</button>
-              <a class="btn ghost" href="#" target="_blank" rel="noopener">Source</a>
-            </div>
-          </article>
-
         </div>
       </section>
 
-      <!-- Modal container for projects -->
-      <div class="modal-backdrop" id="modalBackdrop" role="dialog" aria-hidden="true">
-        <div class="modal" role="document">
-          <button class="close" id="modalClose" aria-label="Close">✕</button>
-          <div id="modalContent">
-            <!-- Filled by JS -->
-          </div>
-        </div>
-      </div>
-
-      <!-- EXPERIENCE -->
-      <section id="experience" aria-labelledby="experience-heading">
+      <!-- About & Education -->
+      <section id="about" class="fade-up reveal">
         <div class="section-title">
-          <h3 id="experience-heading">Experience & Projects Timeline</h3>
-          <div class="muted">Coursework & practical work</div>
+          <h3>About & Education</h3>
+          <div class="small muted">Resume snapshot • Academic background • Courses</div>
         </div>
 
-        <div style="margin-top:12px" class="timeline">
-          <div class="timeline-item">
-            <h5>MongoDB API — Personal Project</h5>
-            <p class="muted">Design and development of RESTful API with Node.js and MongoDB; covered CRUD, schema design, and Postman testing.</p>
-            <div class="small muted">2024 — Present</div>
-          </div>
+        <div style="display:grid;grid-template-columns:1fr 320px;gap:18px">
+          <div>
+            <p>Hello — I'm a dedicated BS Software Engineering student at Virtual University of Pakistan. I build and iterate on web projects to hone my skills in front-end and back-end development, with a strong interest in UI/UX and clean code practices.</p>
 
-          <div class="timeline-item">
-            <h5>Front-end eCommerce Mockups</h5>
-            <p class="muted">Multiple clothing store mockups focusing on layout, product cards, and responsive UX.</p>
-            <div class="small muted">2023 — 2025</div>
-          </div>
-
-          <div class="timeline-item">
-            <h5>Education Website Template</h5>
-            <p class="muted">Multi-page template to showcase courses and resources with semantic HTML and accessibility best practices.</p>
-            <div class="small muted">2024 — 2025</div>
-          </div>
-        </div>
-      </section>
-
-      <!-- EDUCATION & CERTIFICATIONS -->
-      <section id="education" aria-labelledby="education-heading">
-        <div class="section-title">
-          <h3 id="education-heading">Education & Certifications</h3>
-          <div class="muted">Formal education and selected certificates</div>
-        </div>
-
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:12px">
-          <div class="card">
-            <h4>Bachelor of Science in Software Engineering (BSSE)</h4>
-            <p class="muted">Virtual University of Pakistan • 2021 – Present</p>
-            <p>Current CGPA: <strong>2.02 / 4.00</strong></p>
-            <h5 style="margin-top:8px">Major Courses</h5>
-            <ul class="muted">
+            <h4 style="margin-top:12px">Major Courses</h4>
+            <ul class="small muted">
               <li>Introduction to Computing</li>
               <li>Introduction to Programming</li>
               <li>Data Structures</li>
               <li>Object-Oriented Programming</li>
+              <li>Data Communication</li>
               <li>Database Management Systems</li>
+              <li>Software Engineering - I</li>
+              <li>Operating Systems</li>
+              <li>Computer Networks</li>
             </ul>
-          </div>
 
-          <div class="card">
-            <h4>Certifications</h4>
-            <ul class="muted">
-              <li>Back End Development & APIs — freeCodeCamp (Oct 17, 2025)</li>
-              <li>Full Stack Web Development — IDEO College of Technology (May 8, 2024)</li>
-              <li>CCNAv7: Introduction to Networks — Cisco (Jun 2024)</li>
-              <li>WordPress — DigiSkills.pk (Nov 2023 – Feb 2024)</li>
-              <li>Digital Literacy — DigiSkills.pk (Oct 2020 – Jan 2021)</li>
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      <!-- CONTACT -->
-      <section id="contact" aria-labelledby="contact-heading">
-        <div class="section-title">
-          <h3 id="contact-heading">Contact & Hire</h3>
-          <div class="muted">Open for internships and junior developer roles</div>
-        </div>
-
-        <div class="contact-grid" style="margin-top:12px">
-          <form id="contactForm" aria-label="Contact form">
-            <label class="small">Your name</label>
-            <input type="text" id="name" name="name" placeholder="Your full name" required />
-            <label class="small">Email</label>
-            <input type="email" id="email" name="email" placeholder="you@example.com" required />
-            <label class="small">Message</label>
-            <textarea id="message" name="message" placeholder="Tell me about the opportunity..." required></textarea>
-            <div style="display:flex;gap:10px;align-items:center">
-              <button class="btn" type="submit">Send Message</button>
-              <div class="muted small">Or email: <a href="mailto:azamghafoorreal@gmail.com">azamghafoorreal@gmail.com</a></div>
+            <h4 style="margin-top:12px">Education</h4>
+            <div class="timeline" role="list">
+              <div class="timeline-item" role="listitem">
+                <div class="timeline-icon">🎓</div>
+                <div>
+                  <strong>BS Software Engineering — Virtual University of Pakistan</strong>
+                  <div class="small muted">2021 – Present • Current CGPA: 2.02 / 4.00</div>
+                </div>
+              </div>
+              <div class="timeline-item" role="listitem">
+                <div class="timeline-icon">🏫</div>
+                <div>
+                  <strong>FSc. Pre-Engineering — BISE Lahore</strong>
+                  <div class="small muted">2019 – 2021 • Govt. Islamia Degree College, Kasur • Marks: 500 / 1100</div>
+                </div>
+              </div>
+              <div class="timeline-item" role="listitem">
+                <div class="timeline-icon">🏫</div>
+                <div>
+                  <strong>Matriculation (Science) — BISE Lahore</strong>
+                  <div class="small muted">2017 – 2019 • Govt. Islamia High School, Kasur • Marks: 705 / 1100</div>
+                </div>
+              </div>
             </div>
-            <div id="formStatus" class="small muted" style="margin-top:8px"></div>
-          </form>
+          </div>
 
-          <aside class="card">
-            <h4>Get in touch</h4>
-            <p class="muted">I'm available for internships and junior dev roles. I respond quickly to emails.</p>
-            <p><strong>Email:</strong> <a href="mailto:azamghafoorreal@gmail.com">azamghafoorreal@gmail.com</a></p>
-            <p><strong>Phone:</strong> +92-325-683058</p>
-            <p><strong>LinkedIn:</strong> <a href="https://linkedin.com/in/azamagr">linkedin.com/in/azamagr</a></p>
-            <p style="margin-top:10px"><a class="btn" href="assets/Muhammad-Azam-Resume.pdf" download>Download Resume</a></p>
+          <aside>
+            <div class="card" style="padding:14px">
+              <h4 style="margin:0">Certifications</h4>
+              <p class="small muted" style="margin-top:6px">Selected</p>
+              <ul style="margin:10px 0 0;padding-left:18px" class="small muted">
+                <li>Back End Development & APIs — freeCodeCamp (Oct 17, 2025)</li>
+                <li>Full Stack Web Development — IDEO College of Technology (May 8, 2024)</li>
+                <li>CCNAv7: Introduction to Networks — Cisco Networking Academy (Jun 2024)</li>
+                <li>WordPress — DigiSkills.pk (Nov 2023 – Feb 2024)</li>
+                <li>Digital Literacy — DigiSkills.pk (Oct 2020 – Jan 2021)</li>
+              </ul>
+            </div>
+
+            <div style="height:18px"></div>
+
+            <div class="card" style="padding:14px">
+              <h4 style="margin:0">Languages</h4>
+              <div class="small muted" style="margin-top:8px">English • Urdu • Punjabi</div>
+              <div style="height:10px"></div>
+              <h4 style="margin:0">Hobbies</h4>
+              <div class="small muted" style="margin-top:8px">Cricket • Badminton • Ludo</div>
+            </div>
           </aside>
         </div>
       </section>
 
-      <!-- FOOTER -->
-      <footer>
-        <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
-          <div class="muted">© <span id="year"></span> Muhammad Azam — azamagr</div>
-          <div style="display:flex;gap:12px;align-items:center">
-            <a class="underline muted" href="https://github.com/azamagr">GitHub</a>
-            <a class="underline muted" href="https://linkedin.com/in/azamagr">LinkedIn</a>
-            <a class="underline muted" href="mailto:azamghafoorreal@gmail.com">Email</a>
+      <!-- Skills & Proficiency -->
+      <section id="skills" class="fade-up reveal">
+        <div class="section-title">
+          <h3>Skills & Proficiency</h3>
+          <div class="small muted">Technical strengths with approximate proficiency</div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px">
+          <div>
+            <div class="skill-bar">
+              <div class="skill-title"><span>React.js</span><span class="muted">60%</span></div>
+              <div class="bar" aria-hidden="true"><i style="width:60%"></i></div>
+            </div>
+
+            <div style="height:10px"></div>
+
+            <div class="skill-bar">
+              <div class="skill-title"><span>Laravel</span><span class="muted">55%</span></div>
+              <div class="bar" aria-hidden="true"><i style="width:55%"></i></div>
+            </div>
+
+            <div style="height:10px"></div>
+
+            <div class="skill-bar">
+              <div class="skill-title"><span>MongoDB</span><span class="muted">50%</span></div>
+              <div class="bar" aria-hidden="true"><i style="width:50%"></i></div>
+            </div>
+          </div>
+
+          <div>
+            <div class="skill-bar">
+              <div class="skill-title"><span>HTML & CSS</span><span class="muted">75%</span></div>
+              <div class="bar" aria-hidden="true"><i style="width:75%"></i></div>
+            </div>
+
+            <div style="height:10px"></div>
+
+            <div class="skill-bar">
+              <div class="skill-title"><span>JavaScript</span><span class="muted">65%</span></div>
+              <div class="bar" aria-hidden="true"><i style="width:65%"></i></div>
+            </div>
+
+            <div style="height:10px"></div>
+
+            <div class="skill-bar">
+              <div class="skill-title"><span>MySQL</span><span class="muted">45%</span></div>
+              <div class="bar" aria-hidden="true"><i style="width:45%"></i></div>
+            </div>
           </div>
         </div>
+      </section>
+
+      <!-- Contact -->
+      <section id="contact" class="fade-up reveal">
+        <div class="section-title">
+          <h3>Contact</h3>
+          <div class="small muted">Let's connect — send a message or download my resume</div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 360px;gap:18px">
+          <div>
+            <form id="contactForm" novalidate>
+              <div class="form-row">
+                <input type="text" id="name" name="name" placeholder="Your name" required aria-label="Your name">
+                <input type="email" id="email" name="email" placeholder="Your email" required aria-label="Your email">
+              </div>
+              <div style="height:10px"></div>
+              <input type="text" id="subject" name="subject" placeholder="Subject" aria-label="Subject">
+              <div style="height:10px"></div>
+              <textarea id="message" name="message" placeholder="Your message" required aria-label="Message"></textarea>
+              <div style="display:flex;gap:8px;margin-top:10px;align-items:center">
+                <button class="btn" type="submit">Send Message</button>
+                <button class="btn-ghost" type="button" id="resetForm">Reset</button>
+                <div class="form-help" id="formStatus" aria-live="polite"></div>
+              </div>
+            </form>
+            <div class="small muted" style="margin-top:12px">Prefer email? <a class="action" href="mailto:azamghafoorreal@gmail.com">azamghafoorreal@gmail.com</a></div>
+          </div>
+
+          <aside class="card" style="padding:18px">
+            <h4 style="margin:0">Quick Info</h4>
+            <div class="small muted" style="margin-top:10px">
+              <strong>Availability:</strong> Seeking internships in Lahore • Remote opportunities considered<br><br>
+              <strong>Preferred roles:</strong> Frontend / Backend / Full Stack Development<br><br>
+              <strong>Resume:</strong> <a href="assets/Muhammad-Azam-Resume.pdf" download class="action">Download PDF</a>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <!-- References -->
+      <section id="references" class="fade-up reveal">
+        <div class="section-title">
+          <h3>References</h3>
+          <div class="small muted">Professional reference</div>
+        </div>
+
+        <div style="display:flex;gap:14px;align-items:center">
+          <div class="timeline-icon">👨‍💼</div>
+          <div>
+            <strong>Muhammad Qasim</strong> — Detection / Software Engineer (Remote, Austria) <br>
+            <span class="small muted">Phone: +92-305-4570521 • Email: qlfqasim@gmail.com • LinkedIn: linkedin.com/in/qasimqlf</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <footer>
+        <div>© <strong>Muhammad Azam</strong> • <span class="muted">BSSE @ Virtual University of Pakistan</span></div>
+        <div style="display:flex;gap:10px;align-items:center">
+          <a class="tag" href="https://github.com/azamagr" target="_blank" rel="noopener">github.com/azamagr</a>
+          <a class="tag" href="https://linkedin.com/in/azamagr" target="_blank" rel="noopener">linkedin.com/in/azamagr</a>
+          <a class="tag" href="mailto:azamghafoorreal@gmail.com">Email</a>
+        </div>
       </footer>
-    </main>
+    </section>
+  </main>
+
+  <!-- PROJECT DETAILS MODAL (re-used for all project details) -->
+  <div class="modal-backdrop" id="modalBackdrop" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal" role="document" aria-labelledby="modalTitle">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:12px">
+        <div>
+          <h3 id="modalTitle">Project Details</h3>
+          <div id="modalSubtitle" class="small muted">Project subtitle</div>
+        </div>
+        <div style="display:flex;gap:8px;align-items:center">
+          <button class="btn-ghost" id="modalClose">Close</button>
+        </div>
+      </div>
+
+      <hr style="border:none;border-top:1px solid var(--glass-border);margin:14px 0">
+
+      <div id="modalBody" style="display:grid;grid-template-columns:1fr 300px;gap:18px">
+        <div>
+          <div id="modalDesc">Project description goes here — objectives, features, and implementation notes. This description is populated by JavaScript and can include tech stack, usage, and what you learned from building the project.</div>
+
+          <h4 style="margin-top:12px">Tech Stack</h4>
+          <div id="modalTech" class="small muted">HTML, CSS</div>
+
+          <h4 style="margin-top:12px">How to run</h4>
+          <pre id="modalRun" style="background:var(--glass-2);padding:12px;border-radius:8px;font-size:13px;color:var(--muted);overflow:auto"># Example
+cd projects/project-folder
+# open index.html or run a local server
+</pre>
+        </div>
+
+        <aside>
+          <div class="screenshot" style="height:200px;margin-bottom:12px">Project screenshot</div>
+          <div class="small muted">Links</div>
+          <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px">
+            <a id="modalRepo" class="btn-ghost" href="#" target="_blank" rel="noopener">Repository</a>
+            <a id="modalLive" class="btn-ghost" href="#" target="_blank" rel="noopener">Live demo</a>
+          </div>
+        </aside>
+      </div>
+    </div>
   </div>
 
+  <!-- Accessibility: skip to content -->
+  <a class="sr-only" href="#pageWrap">Skip to content</a>
+
   <script>
-    // ------------------ Theme handling ------------------
-    (function(){
-      const root = document.documentElement;
-      const stored = localStorage.getItem('theme');
+    /* =========================
+       JavaScript: Interactions
+       ========================= */
+
+    (function () {
+      // Basic DOM refs
       const themeToggle = document.getElementById('themeToggle');
-      const apply = (t)=>{ if(t==='light') root.setAttribute('data-theme','light'); else root.removeAttribute('data-theme'); };
-      if(stored) apply(stored);
-      else{
-        // prefer dark for system
-        const prefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
-        apply(prefersLight ? 'light' : 'dark');
+      const themeQuick = document.getElementById('themeQuick');
+      const themeIcon = document.getElementById('themeIcon');
+      const copyEmailBtn = document.getElementById('copyEmailBtn');
+      const emailText = document.getElementById('emailText');
+      const downloadResume = document.getElementById('downloadResume');
+      const contactForm = document.getElementById('contactForm');
+      const resetForm = document.getElementById('resetForm');
+      const formStatus = document.getElementById('formStatus');
+
+      // Modal for projects
+      const modalBackdrop = document.getElementById('modalBackdrop');
+      const modalClose = document.getElementById('modalClose');
+      const modalTitle = document.getElementById('modalTitle');
+      const modalSubtitle = document.getElementById('modalSubtitle');
+      const modalBody = document.getElementById('modalBody');
+      const modalDesc = document.getElementById('modalDesc');
+      const modalTech = document.getElementById('modalTech');
+      const modalRun = document.getElementById('modalRun');
+      const modalRepo = document.getElementById('modalRepo');
+      const modalLive = document.getElementById('modalLive');
+
+      // Accessibility helpers
+      function trapFocus(container) {
+        const focusable = container.querySelectorAll('a[href], button, textarea, input, [tabindex]:not([tabindex="-1"])');
+        if (!focusable.length) return;
+        const first = focusable[0], last = focusable[focusable.length - 1];
+        container.addEventListener('keydown', function(e){
+          if (e.key === 'Tab') {
+            if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+            else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+          } else if (e.key === 'Escape') {
+            closeModal();
+          }
+        });
+        first.focus();
       }
-      themeToggle.addEventListener('click',()=>{
-        const current = root.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
-        const next = current === 'light' ? 'dark' : 'light';
-        apply(next);
-        localStorage.setItem('theme', next);
-        themeToggle.textContent = next === 'light' ? '🌞' : '🌙';
-        themeToggle.setAttribute('aria-pressed', next === 'dark');
+
+      function openModal(data) {
+        modalTitle.textContent = data.title;
+        modalSubtitle.textContent = data.subtitle || '';
+        modalDesc.textContent = data.description || '';
+        modalTech.textContent = (data.tech || []).join(' • ');
+        modalRun.textContent = data.run || '';
+        modalRepo.href = data.repo || '#';
+        modalLive.href = data.live || '#';
+        modalBackdrop.style.display = 'grid';
+        modalBackdrop.setAttribute('aria-hidden', 'false');
+        trapFocus(modalBackdrop);
+      }
+
+      function closeModal() {
+        modalBackdrop.style.display = 'none';
+        modalBackdrop.setAttribute('aria-hidden', 'true');
+      }
+
+      modalClose.addEventListener('click', closeModal);
+      modalBackdrop.addEventListener('click', function (e) {
+        if (e.target === modalBackdrop) closeModal();
       });
-      // set initial icon
-      themeToggle.textContent = (root.getAttribute('data-theme') === 'light') ? '🌞' : '🌙';
-    })();
 
-    // ------------------ Year ------------------
-    document.getElementById('year').textContent = new Date().getFullYear();
+      // Predefined project details (fill accurately later if you like)
+      const projectsData = {
+        baroque: {
+          title: 'BAROQUE Clothing Store — Front-End',
+          subtitle: 'Responsive 5-page e-commerce design',
+          description: 'Front-end design focused on a clean product showcase, responsive grids, and polished UI. Implemented semantic HTML, accessible navigation, and modular CSS. Ideal for demonstrating layout & UI skills.',
+          tech: ['HTML', 'CSS', 'Responsive Design', 'Accessibility'],
+          run: 'Open index.html in browser or run a static server:\npython -m http.server 8000',
+          repo: '#',
+          live: '#'
+        },
+        education: {
+          title: 'Education Website',
+          subtitle: 'Multi-page educational website (in progress)',
+          description: 'Multi-page design for displaying courses, instructors, and resources. Focus on structured content, readable typography, and accessible navigation. CSS is modular and responsive.',
+          tech: ['HTML', 'CSS', 'Accessibility'],
+          run: 'Open index.html in the project folder in your browser.',
+          repo: '#',
+          live: '#'
+        },
+        jstore: {
+          title: 'J. Clothing Store',
+          subtitle: 'Interactive front-end store',
+          description: 'A modern responsive front-end built with Bootstrap & JavaScript. Includes product cards, responsive grid, and basic cart interactions implemented with client-side state (in progress).',
+          tech: ['HTML', 'CSS', 'Bootstrap', 'JavaScript'],
+          run: 'Install dependencies if using a bundler; otherwise open index.html.',
+          repo: '#',
+          live: '#'
+        },
+        mongoapi: {
+          title: 'MongoDB API Development',
+          subtitle: 'Node.js + Express + MongoDB',
+          description: 'RESTful API implementing standard CRUD endpoints for a product collection. Includes request validation, error handling, and Postman collection for tests. Deployed locally using environment variables.',
+          tech: ['Node.js', 'Express', 'MongoDB'],
+          run: 'cd backend/mongo-api\nnpm install\n# configure MONGO_URI in .env\nnpm run dev',
+          repo: '#',
+          live: '#'
+        },
+        chatbox: {
+          title: 'Chat-box Application',
+          subtitle: 'Interactive chat UI',
+          description: 'A small chat-box UI demo using jQuery for DOM manipulation and event handling. Demonstrates UI behaviors, input handling, and simulated message flow.',
+          tech: ['HTML', 'jQuery'],
+          run: 'Open index.html in the project folder.',
+          repo: '#',
+          live: '#'
+        },
+        gcu: {
+          title: 'Home Page (GCU Lahore)',
+          subtitle: 'Static landing page mockup',
+          description: 'Static HTML landing page built with semantic markup and well-structured content. Focused on clean hero section, accessibility, and content hierarchy.',
+          tech: ['HTML'],
+          run: 'Open index.html in the project folder.',
+          repo: '#',
+          live: '#'
+        }
+      };
 
-    // ------------------ Modal system ------------------
-    const projects = {
-      1: {
-        title:'BAROQUE Clothing Store',
-        body:`<p>Responsive 5-page eCommerce front-end inspired by BAROQUE. Features product grid, product detail mockups, and cart UI (static).</p><ul><li>HTML & CSS with focus on brand style</li><li>Responsive layout and product cards</li><li>Imagery & typography emphasis</li></ul>`,
-        images:[]
-      },
-      2: {title:'Education Website', body:'<p>Multi-page educational website design with semantic HTML and clear navigation.</p>'},
-      3: {title:'J. Clothing Store', body:'<p>Responsive store with Bootstrap components and custom JS for interactivity.</p>'},
-      4: {title:'MongoDB API', body:'<p>RESTful API built with Node.js, Express, and MongoDB. Includes CRUD routes and Postman collection.</p>'},
-      5: {title:'Chat-box', body:'<p>Interactive chat UI showcasing DOM updates and event-driven UI.</p>'},
-      6: {title:'Home Page (GCU Lahore)', body:'<p>Landing page mockup focused on hero and semantic structure.</p>'},
-      7: {title:'Utilities & Templates', body:'<p>Small utilities and templates for prototyping.</p>'},
-      8: {title:'Project Template', body:'<p>Clean starter template for new projects.</p>'},
-      9: {title:'API Integrations', body:'<p>Examples of third-party API integration and data parsing.</p>'},
-      10:{title:'Misc Demos', body:'<p>Small experiments and demos for UI/UX ideas.</p>'}
-    };
-
-    const modalBackdrop = document.getElementById('modalBackdrop');
-    const modalContent = document.getElementById('modalContent');
-    const modalClose = document.getElementById('modalClose');
-
-    document.querySelectorAll('[data-open]').forEach(btn=>{
-      btn.addEventListener('click', (e)=>{
-        const id = btn.getAttribute('data-open');
-        openModal(id);
+      // Hook project detail buttons
+      document.querySelectorAll('[data-project]').forEach(btn=>{
+        btn.addEventListener('click', function(){
+          const key = btn.getAttribute('data-project');
+          if (projectsData[key]) openModal(projectsData[key]);
+          else alert('Project details not found.');
+        });
       });
-    });
-    // keyboard support for cards (Enter to open)
-    document.querySelectorAll('.card[tabindex]').forEach(card=>{
-      card.addEventListener('keydown', (e)=>{
-        if(e.key === 'Enter' || e.key === ' ') {
-          const id = card.getAttribute('data-project');
-          openModal(id);
+
+      // Theme management
+      const htmlEl = document.documentElement;
+      function setTheme(isLight) {
+        if (isLight) htmlEl.classList.add('light');
+        else htmlEl.classList.remove('light');
+        // update icon (sun/moon)
+        themeIcon.innerHTML = isLight
+          ? '<path d=\"M12 3v2M12 19v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M1 12h2M21 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4\" stroke=\"currentColor\" stroke-width=\"1.2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" />'
+          : '<path d=\"M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z\" fill=\"currentColor\" />';
+      }
+
+      // read persisted theme
+      const saved = localStorage.getItem('theme.light');
+      setTheme(saved === '1');
+
+      themeToggle.addEventListener('click', function(){
+        const isLight = !document.documentElement.classList.contains('light');
+        setTheme(isLight);
+        localStorage.setItem('theme.light', isLight ? '1' : '0');
+      });
+      themeQuick.addEventListener('click', function(){
+        themeToggle.click();
+      });
+
+      // copy email
+      copyEmailBtn.addEventListener('click', function(){
+        const text = emailText.textContent.trim();
+        navigator.clipboard?.writeText(text).then(()=> {
+          copyEmailBtn.textContent = 'Copied';
+          setTimeout(()=> copyEmailBtn.textContent = 'Copy', 1500);
+        }).catch(()=> {
+          alert('Could not copy. Use right-click to copy the email address.');
+        });
+      });
+
+      // quick shortcut keys
+      document.addEventListener('keydown', function(e){
+        if (e.key === 'T' || e.key === 't') themeToggle.click();
+        if (e.key === 'R' || e.key === 'r') downloadResume.click();
+      });
+
+      // contact form handling (client-side)
+      contactForm.addEventListener('submit', function(e){
+        e.preventDefault();
+        const name = document.getElementById('name').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const subject = document.getElementById('subject').value.trim() || 'Contact from Portfolio';
+        const message = document.getElementById('message').value.trim();
+        if (!name || !email || !message) {
+          formStatus.textContent = 'Please fill required fields (name, email, message).';
+          formStatus.style.color = 'var(--danger)';
+          return;
+        }
+        // Fallback: open mailto prefilled
+        const mailto = `mailto:azamghafoorreal@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent('Name: '+name+'\\nEmail: '+email+'\\n\\n'+message)}`;
+        // Try to open mail client
+        window.location.href = mailto;
+        formStatus.textContent = 'Opening your mail client...';
+        formStatus.style.color = 'var(--accent)';
+        setTimeout(()=> {
+          contactForm.reset();
+          formStatus.textContent = 'If your mail client did not open, you can email directly: azamghafoorreal@gmail.com';
+          formStatus.style.color = 'var(--muted)';
+        }, 1200);
+      });
+
+      resetForm.addEventListener('click', function(){
+        contactForm.reset();
+        formStatus.textContent = '';
+      });
+
+      // Simple reveal on scroll for .fade-up elements
+      const revealEls = document.querySelectorAll('.fade-up');
+      const io = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('reveal');
+            io.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.06 });
+      revealEls.forEach(el => io.observe(el));
+
+      // Smooth scrolling for internal links
+      document.querySelectorAll('a[href^="#"]').forEach(a=>{
+        a.addEventListener('click', function(e){
+          const href = a.getAttribute('href');
+          if (href.length > 1) {
+            e.preventDefault();
+            const target = document.querySelector(href);
+            if (target) target.scrollIntoView({behavior:'smooth', block:'start'});
+          }
+        });
+      });
+
+      // Accessibility improvement: ensure all .project have keydown handler for Enter to open details
+      document.querySelectorAll('.project').forEach(card=>{
+        card.addEventListener('keydown', function(e){
+          if (e.key === 'Enter') {
+            const btn = card.querySelector('[data-project]');
+            if (btn) btn.click();
+          }
+        });
+      });
+
+      // Provide small helpful console message for maintainers
+      console.log('%cPortfolio loaded — azamagr', 'color: ' + getComputedStyle(document.documentElement).getPropertyValue('--accent') + '; font-size:14px; font-weight:700');
+
+      // Inform user if resume link missing
+      downloadResume.addEventListener('click', function(e){
+        const href = downloadResume.getAttribute('href') || '';
+        if (href.endsWith('Resume.pdf') === false) {
+          // Do not block default; just log
+          console.warn('Resume link is set to:', href, ' — ensure assets/Muhammad-Azam-Resume.pdf exists for resume download.');
         }
       });
-      // click anywhere on card also opens
-      card.addEventListener('click', ()=>{ openModal(card.getAttribute('data-project')) });
-    });
 
-    function openModal(id){
-      const data = projects[id];
-      if(!data) return;
-      modalContent.innerHTML = `<h3>${escapeHtml(data.title)}</h3>` + (data.images && data.images.length ? `<div style='display:flex;gap:8px;margin-top:8px'>${data.images.map(src=>`<img src='${src}' style='max-width:180px;border-radius:8px'/>`).join('')}</div>` : '') + `<div style='margin-top:12px'>${data.body}</div><p style='margin-top:12px'><strong>Source:</strong> <a href='#' class='underline'>View repository</a></p>`;
-      modalBackdrop.style.display='flex';
-      modalBackdrop.setAttribute('aria-hidden','false');
-      // trap focus
-      trapFocus(modalBackdrop);
-    }
-    modalClose.addEventListener('click', closeModal);
-    modalBackdrop.addEventListener('click', (e)=>{ if(e.target === modalBackdrop) closeModal() });
-    document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closeModal(); });
-    function closeModal(){ modalBackdrop.style.display='none'; modalBackdrop.setAttribute('aria-hidden','true'); document.activeElement && document.activeElement.blur(); }
-
-    // simple focus trap
-    function trapFocus(container){
-      const focusable = container.querySelectorAll('a,button,input,textarea,[tabindex]:not([tabindex="-1"])');
-      if(!focusable.length) return;
-      const first = focusable[0];
-      const last = focusable[focusable.length-1];
-      first.focus();
-      container.addEventListener('keydown', function(e){
-        if(e.key !== 'Tab') return;
-        if(e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); }
-        else if(!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
+      // Make modal close with Escape globally
+      document.addEventListener('keydown', function(e){
+        if (e.key === 'Escape') closeModal();
       });
-    }
 
-    // ------------------ Contact form (mock) ------------------
-    const contactForm = document.getElementById('contactForm');
-    const formStatus = document.getElementById('formStatus');
-    contactForm.addEventListener('submit', (e)=>{
-      e.preventDefault();
-      const name = document.getElementById('name').value.trim();
-      const email = document.getElementById('email').value.trim();
-      const message = document.getElementById('message').value.trim();
-      if(!name || !email || !message){ formStatus.textContent = 'Please complete all fields.'; return; }
-      // Simple validation
-      formStatus.textContent = 'Preparing message...';
-      setTimeout(()=>{ formStatus.textContent = 'This demo does not send emails. Please use the provided email: azamghafoorreal@gmail.com'; }, 900);
-      contactForm.reset();
-    });
-
-    // ------------------ Small accessibility & UX helpers ------------------
-    function escapeHtml(unsafe) {
-      return unsafe
-       .replace(/&/g, "&amp;")
-       .replace(/</g, "&lt;")
-       .replace(/>/g, "&gt;")
-       .replace(/\"/g, "&quot;")
-       .replace(/'/g, "&#039;");
-    }
-
-    // Keyboard shortcut: press "g" then "p" to jump to projects
-    (function(){
-      let buffer = '';
-      window.addEventListener('keydown', (e)=>{
-        if(e.key.length === 1) buffer += e.key.toLowerCase();
-        if(buffer.endsWith('gp')){
-          document.getElementById('projects-heading').scrollIntoView({behavior:'smooth'});
-          buffer = '';
-        }
-        // limit buffer
-        if(buffer.length>5) buffer = buffer.slice(-5);
-      });
     })();
-
-    // Replace profile image if assets/profile.jpg exists (graceful fallback)
-    (function(){
-      const img = document.getElementById('profileImg');
-      const testUrl = 'assets/profile.jpg';
-      fetch(testUrl, {method:'HEAD'}).then(res=>{
-        if(res.ok) img.src = testUrl;
-      }).catch(()=>{});
-    })();
-
   </script>
+
+  <!-- LONG COMMENT / INSTRUCTIONS:
+       - Replace assets/profile.jpg with your actual profile photo.
+       - Replace assets/Muhammad-Azam-Resume.pdf with your resume file (same filename).
+       - Replace project live/repo links in projectsData above with actual URLs to each project repository/demo.
+       - This is a single-file starter: you can extract CSS/JS into separate files for production.
+       - The theme persists in localStorage. Press "T" to toggle theme quickly.
+       - Contact form uses a mailto fallback for easier email sending. For production, you can wire this to a serverless function or an email-sending API.
+       - Accessibility: simple focus trapping is implemented in modal; more improvements are encouraged (aria labels, image alt text).
+       - To deploy: add this index.html to your `azamagr.github.io` repository root and ensure `assets/` contains profile.jpg and resume PDF.
+  -->
 </body>
 </html>
