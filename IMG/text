@@ -1,0 +1,50 @@
+Full project structure
+azam-portfolio/
+├── .github/workflows/deploy.yml   ← auto-builds & deploys on every push
+├── .gitignore
+├── index.html
+├── package.json
+├── vite.config.js
+├── tailwind.config.js
+├── postcss.config.js
+└── src/
+    ├── main.jsx
+    ├── index.css
+    ├── App.jsx                    ← assembles all sections
+    ├── ThemeContext.jsx
+    ├── ThemeToggle.jsx
+    ├── Preloader.jsx
+    ├── Navbar.jsx
+    ├── Hero.jsx
+    ├── About.jsx
+    ├── ProcessTimeline.jsx
+    ├── SkillsMatrix.jsx
+    ├── Projects.jsx
+    ├── Contact.jsx
+    └── Footer.jsx
+Steps to get it live at azamagr.github.io
+1. Create the repo (name matters)
+On GitHub, create a new repository named exactly azamagr.github.io (must match your username, lowercase). This special name is what makes GitHub Pages serve it at the root domain.
+2. Get the project onto your machine
+Download all the files above from this chat into a folder, keeping the same structure (src/ subfolder, .github/workflows/ subfolder, etc.).
+3. Install dependencies
+bashnpm install
+4. Push to GitHub
+bashgit init
+git add .
+git commit -m "Initial portfolio"
+git branch -M main
+git remote add origin https://github.com/azamagr/azamagr.github.io.git
+git push -u origin main
+5. Turn on GitHub Pages via Actions
+In the repo: Settings → Pages → Build and deployment → Source, select GitHub Actions (not "Deploy from a branch"). The workflow I added (.github/workflows/deploy.yml) will then run automatically on this push, build the Vite project, and publish it.
+6. Check it
+Go to the Actions tab, watch the Deploy to GitHub Pages run finish (green check), then visit:
+https://azamagr.github.io
+It can take a minute or two after the first successful run to go live.
+A few things worth knowing
+
+Every future git push to main re-triggers the workflow and redeploys automatically — no manual build step needed.
+vite.config.js has base: "/" because this is a username.github.io repo (root domain). If you ever host it as a normal project repo instead (e.g. github.com/azamagr/portfolio), you'd change that to base: "/portfolio/".
+You still need to drop in your real media (headshot photo for About.jsx, video files for Hero.jsx) — those are referenced by path but not included, since I don't have your actual assets.
+If npm install complains about anything, run npm run dev locally first to confirm it all boots before pushing — cheaper to catch issues on your machine than in CI.
