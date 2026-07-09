@@ -7,5 +7,5 @@ import react from "@vitejs/plugin-react";
 // base to "/portfolio/" and deploy to https://azamagr.github.io/portfolio/.)
 export default defineConfig({
   plugins: [react()],
-  base: "/azamagr.github.io/",
+  base: "/",
 });
