@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
+import { useTheme } from "./ThemeContext";
 
 /**
  * SkillsMatrix
@@ -58,13 +59,13 @@ const CATEGORIES = [
 
 export default function SkillsMatrix() {
   return (
-    <section id="skills" className="bg-white py-28 sm:py-32">
+    <section id="skills" className="bg-white py-28 transition-colors duration-300 dark:bg-[#0a0a0a] sm:py-32">
       <div className="mx-auto max-w-7xl px-6 sm:px-10">
         <div className="mb-14">
-          <span className="inline-block rounded-full border border-black/10 bg-black/5 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-black/60">
+          <span className="inline-block rounded-full border border-black/10 bg-black/5 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-black/60 dark:border-white/15 dark:bg-white/5 dark:text-white/60">
             Technical Expertise
           </span>
-          <h2 className="mt-4 text-4xl font-black tracking-tight text-black sm:text-5xl">
+          <h2 className="mt-4 text-4xl font-black tracking-tight text-black transition-colors duration-300 dark:text-white sm:text-5xl">
             Skills Matrix
           </h2>
         </div>
@@ -88,9 +89,9 @@ function CategoryBox({ category, index }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.3 }}
       transition={{ duration: 0.5, ease: "easeOut", delay: index * 0.08 }}
-      className="rounded-2xl border border-black/10 bg-black/[0.02] p-7"
+      className="rounded-2xl border border-black/10 bg-black/[0.02] p-7 transition-colors duration-300 dark:border-white/10 dark:bg-white/[0.03]"
     >
-      <h3 className="mb-5 text-sm font-black uppercase tracking-[0.2em] text-black/50">
+      <h3 className="mb-5 text-sm font-black uppercase tracking-[0.2em] text-black/50 dark:text-white/50">
         {category.name}
       </h3>
       <div className="flex flex-wrap gap-3">
@@ -108,6 +109,12 @@ function CategoryBox({ category, index }) {
 
 function SkillPill({ item, delay }) {
   const [hovered, setHovered] = useState(false);
+  const { theme } = useTheme();
+  const isDark = theme === "dark";
+
+  const baseBg = isDark ? "#1a1a1a" : "#ffffff";
+  const baseText = isDark ? "#ffffff" : "#000000";
+  const baseBorder = isDark ? "rgba(255,255,255,0.15)" : "rgba(0,0,0,0.12)";
 
   return (
     <motion.div
@@ -138,9 +145,9 @@ function SkillPill({ item, delay }) {
       <motion.span
         animate={{
           scale: hovered ? 1.08 : 1,
-          backgroundColor: hovered ? "#ff2a2a" : "#ffffff",
-          color: hovered ? "#ffffff" : "#000000",
-          borderColor: hovered ? "#ff2a2a" : "rgba(0,0,0,0.12)",
+          backgroundColor: hovered ? "#ff2a2a" : baseBg,
+          color: hovered ? "#ffffff" : baseText,
+          borderColor: hovered ? "#ff2a2a" : baseBorder,
         }}
         transition={{ duration: 0.25, ease: "easeOut" }}
         className="inline-block cursor-default select-none rounded-full border px-4 py-2 text-sm font-semibold shadow-sm"

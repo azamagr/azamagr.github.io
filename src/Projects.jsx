@@ -124,15 +124,15 @@ export default function Projects() {
       : PROJECTS.filter((p) => p.category === active);
 
   return (
-    <section id="projects" className="bg-white py-28 sm:py-32">
+    <section id="projects" className="bg-white py-28 transition-colors duration-300 dark:bg-[#0a0a0a] sm:py-32">
       <div className="mx-auto max-w-7xl px-6 sm:px-10">
         {/* Header */}
         <div className="mb-14 flex flex-col gap-8 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <span className="inline-block rounded-full border border-black/10 bg-black/5 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-black/60">
+            <span className="inline-block rounded-full border border-black/10 bg-black/5 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-black/60 dark:border-white/15 dark:bg-white/5 dark:text-white/60">
               Selected Work
             </span>
-            <h2 className="mt-4 text-4xl font-black tracking-tight text-black sm:text-5xl">
+            <h2 className="mt-4 text-4xl font-black tracking-tight text-black transition-colors duration-300 dark:text-white sm:text-5xl">
               Projects
             </h2>
           </div>
@@ -146,7 +146,7 @@ export default function Projects() {
                 className={`relative rounded-full px-5 py-2 text-sm font-semibold transition-colors duration-300 ${
                   active === tab
                     ? "text-white"
-                    : "text-black/60 hover:text-black"
+                    : "text-black/60 hover:text-black dark:text-white/50 dark:hover:text-white"
                 }`}
               >
                 {active === tab && (
@@ -186,25 +186,25 @@ function ProjectCard({ project }) {
       exit={{ opacity: 0, y: -10 }}
       transition={{ duration: 0.35, ease: "easeOut" }}
       whileHover={{ y: -6, scale: 1.015 }}
-      className={`group relative flex flex-col rounded-2xl border border-black/10 bg-white p-7 shadow-sm transition-shadow duration-300 hover:shadow-[0_20px_45px_rgba(0,0,0,0.1)] ${
+      className={`group relative flex flex-col rounded-2xl border border-black/10 bg-white p-7 shadow-sm transition-colors transition-shadow duration-300 hover:shadow-[0_20px_45px_rgba(0,0,0,0.1)] dark:border-white/10 dark:bg-[#141414] dark:hover:shadow-[0_20px_45px_rgba(0,0,0,0.5)] ${
         project.subGrid ? "md:col-span-2" : ""
       }`}
     >
       <div className="flex items-start justify-between gap-4">
         <div>
-          <h3 className="text-xl font-black tracking-tight text-black">
+          <h3 className="text-xl font-black tracking-tight text-black dark:text-white">
             {project.title}
           </h3>
-          <p className="mt-1 text-xs font-semibold uppercase tracking-[0.15em] text-black/40">
+          <p className="mt-1 text-xs font-semibold uppercase tracking-[0.15em] text-black/40 dark:text-white/40">
             {project.meta}
           </p>
         </div>
-        <span className="rounded-full bg-black/5 px-3 py-1 text-[11px] font-semibold text-black/50">
+        <span className="rounded-full bg-black/5 px-3 py-1 text-[11px] font-semibold text-black/50 dark:bg-white/10 dark:text-white/50">
           {project.category}
         </span>
       </div>
 
-      <p className="mt-4 text-sm leading-relaxed text-black/65">
+      <p className="mt-4 text-sm leading-relaxed text-black/65 dark:text-white/60">
         {project.desc}
       </p>
 
@@ -212,7 +212,7 @@ function ProjectCard({ project }) {
         {project.tags.map((tag) => (
           <span
             key={tag}
-            className="rounded-full border border-black/10 bg-black/[0.03] px-3 py-1 text-xs font-medium text-black/70"
+            className="rounded-full border border-black/10 bg-black/[0.03] px-3 py-1 text-xs font-medium text-black/70 dark:border-white/10 dark:bg-white/5 dark:text-white/70"
           >
             {tag}
           </span>
@@ -221,11 +221,11 @@ function ProjectCard({ project }) {
 
       {/* Sub-grid for the Frontend UI Suite */}
       {project.subGrid && (
-        <div className="mt-6 grid grid-cols-2 gap-3 border-t border-black/10 pt-6 sm:grid-cols-3">
+        <div className="mt-6 grid grid-cols-2 gap-3 border-t border-black/10 pt-6 dark:border-white/10 sm:grid-cols-3">
           {project.subGrid.map((item) => (
             <div
               key={item}
-              className="rounded-lg border border-black/10 bg-black/[0.02] px-3 py-3 text-center text-xs font-semibold text-black/70 transition-colors duration-300 hover:border-[#ff2a2a]/40 hover:bg-[#ff2a2a]/5 hover:text-[#ff2a2a]"
+              className="rounded-lg border border-black/10 bg-black/[0.02] px-3 py-3 text-center text-xs font-semibold text-black/70 transition-colors duration-300 hover:border-[#ff2a2a]/40 hover:bg-[#ff2a2a]/5 hover:text-[#ff2a2a] dark:border-white/10 dark:bg-white/5 dark:text-white/70"
             >
               {item}
             </div>
@@ -233,12 +233,12 @@ function ProjectCard({ project }) {
         </div>
       )}
 
-      <div className="mt-6 flex items-center gap-5 border-t border-black/10 pt-5">
+      <div className="mt-6 flex items-center gap-5 border-t border-black/10 pt-5 dark:border-white/10">
         <a
           href={project.github}
           target="_blank"
           rel="noreferrer"
-          className="flex items-center gap-1.5 text-sm font-semibold text-black/70 transition-colors duration-300 hover:text-[#ff2a2a]"
+          className="flex items-center gap-1.5 text-sm font-semibold text-black/70 transition-colors duration-300 hover:text-[#ff2a2a] dark:text-white/70"
         >
           <Github className="h-4 w-4" />
           GitHub Code
@@ -247,7 +247,7 @@ function ProjectCard({ project }) {
           href={project.demo}
           target="_blank"
           rel="noreferrer"
-          className="flex items-center gap-1.5 text-sm font-semibold text-black/70 transition-colors duration-300 hover:text-[#ff2a2a]"
+          className="flex items-center gap-1.5 text-sm font-semibold text-black/70 transition-colors duration-300 hover:text-[#ff2a2a] dark:text-white/70"
         >
           <ExternalLink className="h-4 w-4" />
           Live Demo

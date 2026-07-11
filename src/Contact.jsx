@@ -5,20 +5,19 @@ import { Github, Linkedin, Globe, Mail, MapPin, Phone } from "lucide-react";
 /**
  * Contact
  * ---------------------------------------------------------------------------
- * Dark (#111111) "Get In Touch" section with bright red (#ff2a2a) accents.
+ * "Get In Touch" section — bright red (#ff2a2a) accents, but the base
+ * background/text now follows the site-wide dark/bright theme instead of
+ * being locked to dark mode.
  *
  *  - Left: large statement headline, contact details (email / location /
  *    phone), and three "magnetic" social icons that nudge toward the
  *    cursor within a small radius, then spring back on mouse-leave.
  *  - Right: a minimal form (Name / Email / Subject / Message) with
  *    transparent, bottom-border-only inputs that glow red on focus, and
- *    a pill submit button with a liquid-fill hover effect (a red layer
- *    that rises from the bottom on hover, revealing white text on red).
+ *    a pill submit button with a liquid-fill hover effect.
  *
  * Usage:
  *   <Contact onSubmit={(data) => console.log(data)} />
- * `onSubmit` receives { name, email, subject, message } — wire it up to
- * your API route / email service of choice.
  */
 
 export default function Contact({ onSubmit }) {
@@ -42,16 +41,16 @@ export default function Contact({ onSubmit }) {
   return (
     <section
       id="contact"
-      className="bg-[#111111] py-28 sm:py-32"
+      className="bg-white py-28 transition-colors duration-300 dark:bg-[#111111] sm:py-32"
     >
       <div className="mx-auto grid max-w-7xl grid-cols-1 gap-16 px-6 sm:px-10 md:grid-cols-2 md:gap-12">
         {/* Left column */}
         <div>
-          <span className="inline-block rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-white/60">
+          <span className="inline-block rounded-full border border-black/10 bg-black/5 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-black/60 dark:border-white/15 dark:bg-white/5 dark:text-white/60">
             Get In Touch
           </span>
 
-          <h2 className="mt-6 text-4xl font-black leading-[1.05] tracking-tight text-white sm:text-5xl">
+          <h2 className="mt-6 text-4xl font-black leading-[1.05] tracking-tight text-black transition-colors duration-300 dark:text-white sm:text-5xl">
             Let's build something scalable together.
           </h2>
 
@@ -131,8 +130,8 @@ export default function Contact({ onSubmit }) {
 
 function ContactRow({ icon, children }) {
   return (
-    <div className="flex items-center gap-3 text-sm text-white/70">
-      <span className="flex h-8 w-8 items-center justify-center rounded-full border border-white/15 text-white/60">
+    <div className="flex items-center gap-3 text-sm text-black/70 transition-colors duration-300 dark:text-white/70">
+      <span className="flex h-8 w-8 items-center justify-center rounded-full border border-black/10 text-black/60 dark:border-white/15 dark:text-white/60">
         {icon}
       </span>
       {children}
@@ -166,7 +165,7 @@ function MagneticIcon({ href, label, children }) {
       onMouseLeave={reset}
       animate={{ x: pos.x, y: pos.y }}
       transition={{ type: "spring", stiffness: 200, damping: 15, mass: 0.4 }}
-      className="flex h-12 w-12 items-center justify-center rounded-full border border-white/15 text-white/70 transition-colors duration-300 hover:border-[#ff2a2a] hover:text-white"
+      className="flex h-12 w-12 items-center justify-center rounded-full border border-black/10 text-black/70 transition-colors duration-300 hover:border-[#ff2a2a] hover:text-black dark:border-white/15 dark:text-white/70 dark:hover:text-white"
     >
       {children}
     </motion.a>
@@ -177,7 +176,7 @@ function FormField({ label, name, value, onChange, type = "text", as, rows }) {
   const Tag = as === "textarea" ? "textarea" : "input";
   return (
     <label className="group relative block">
-      <span className="mb-2 block text-xs font-semibold uppercase tracking-[0.2em] text-white/40">
+      <span className="mb-2 block text-xs font-semibold uppercase tracking-[0.2em] text-black/40 dark:text-white/40">
         {label}
       </span>
       <Tag
@@ -187,7 +186,7 @@ function FormField({ label, name, value, onChange, type = "text", as, rows }) {
         value={value}
         onChange={onChange}
         required
-        className="peer w-full resize-none border-0 border-b border-white/20 bg-transparent pb-3 text-white outline-none transition-colors duration-300 placeholder:text-white/30 focus:border-transparent"
+        className="peer w-full resize-none border-0 border-b border-black/20 bg-transparent pb-3 text-black outline-none transition-colors duration-300 placeholder:text-black/30 focus:border-transparent dark:border-white/20 dark:text-white dark:placeholder:text-white/30"
       />
       {/* Glow underline that grows + glows on focus */}
       <span className="pointer-events-none absolute bottom-0 left-0 h-[2px] w-full origin-left scale-x-0 bg-[#ff2a2a] shadow-[0_0_12px_rgba(255,42,42,0.8)] transition-transform duration-300 peer-focus:scale-x-100" />
@@ -199,11 +198,11 @@ function LiquidButton({ children }) {
   return (
     <button
       type="submit"
-      className="group relative mt-2 w-full overflow-hidden rounded-full border border-white/20 px-8 py-4 text-sm font-semibold text-white transition-colors duration-300 sm:w-fit"
+      className="group relative mt-2 w-full overflow-hidden rounded-full border border-black/20 px-8 py-4 text-sm font-semibold text-black transition-colors duration-300 dark:border-white/20 dark:text-white sm:w-fit"
     >
       {/* Liquid fill layer */}
       <span className="absolute inset-0 -z-0 origin-bottom scale-y-0 bg-[#ff2a2a] transition-transform duration-500 ease-[cubic-bezier(0.65,0,0.35,1)] group-hover:scale-y-100" />
-      <span className="relative z-10 group-hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.4)]">
+      <span className="relative z-10 text-black transition-colors duration-300 group-hover:text-white dark:text-white group-hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.4)]">
         {children}
       </span>
     </button>
