@@ -30,7 +30,7 @@ export default function Hero({ bgImageSrc = "/IMG/video.png" }) {
       <img
         src={bgImageSrc}
         alt=""
-        className="absolute inset-0 h-full w-full object-cover opacity-30"
+        className="absolute inset-0 h-full w-full object-cover"
       />
       {/* Red tint so the background photo still reads as part of the brand panel */}
       <div className="absolute inset-0 bg-[#ff2a2a]/70" />
@@ -39,12 +39,12 @@ export default function Hero({ bgImageSrc = "/IMG/video.png" }) {
       <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
 
       {/* Content */}
-      <div className="relative z-20 mx-auto flex h-full w-full max-w-7xl items-center justify-center px-6 sm:px-10">
+      <div className="relative z-20 mx-auto flex h-full w-full max-w-7xl items-center justify-start px-6 sm:px-10">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: "easeOut" }}
-          className="max-w-2xl text-center"
+          className="max-w-2xl text-left"
         >
           <h1 className="font-black leading-[0.95] tracking-tight text-white">
             <span className="block text-3xl sm:text-4xl md:text-5xl">
@@ -67,7 +67,7 @@ export default function Hero({ bgImageSrc = "/IMG/video.png" }) {
             MongoDB, with a focus on performance and scalability.
           </p>
 
-          <div className="mt-9 flex flex-wrap items-center justify-center gap-4">
+          <div className="mt-9 flex flex-wrap items-center justify-start gap-4">
             <a
               href="#projects"
               className="rounded-full bg-white px-7 py-3.5 text-sm font-semibold text-black transition-transform duration-300 hover:scale-105"
