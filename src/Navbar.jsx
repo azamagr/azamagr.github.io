@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import ThemeToggle from "./ThemeToggle.jsx";
 
 /**
  * Navbar
@@ -78,46 +79,52 @@ export default function Navbar() {
             ))}
           </ul>
 
-          {/* Hire Me CTA (desktop) */}
-          <a
-            href="#contact"
-            className="hidden md:inline-flex items-center rounded-full border border-white/30 bg-white/10 px-6 py-2.5 text-sm font-semibold text-white backdrop-blur-md transition-all duration-300 hover:border-[#ff2a2a]/60 hover:bg-white/15 hover:shadow-[0_0_25px_rgba(255,42,42,0.55)]"
-          >
-            Hire Me
-          </a>
+          {/* Hire Me CTA + Theme Toggle (desktop) */}
+          <div className="hidden md:flex items-center gap-3">
+            <ThemeToggle />
+            <a
+              href="#contact"
+              className="inline-flex items-center rounded-full border border-white/30 bg-white/10 px-6 py-2.5 text-sm font-semibold text-white backdrop-blur-md transition-all duration-300 hover:border-[#ff2a2a]/60 hover:bg-white/15 hover:shadow-[0_0_25px_rgba(255,42,42,0.55)]"
+            >
+              Hire Me
+            </a>
+          </div>
 
-          {/* Hamburger (mobile) */}
-          <button
-            type="button"
-            aria-label="Toggle menu"
-            aria-expanded={mobileOpen}
-            onClick={() => setMobileOpen((v) => !v)}
-            className="md:hidden relative z-[10000] flex h-9 w-9 flex-col items-center justify-center gap-[5px]"
-          >
-            <motion.span
-              className="h-[2px] w-6 bg-white"
-              animate={
-                mobileOpen
-                  ? { rotate: 45, y: 7 }
-                  : { rotate: 0, y: 0 }
-              }
-              transition={{ duration: 0.25 }}
-            />
-            <motion.span
-              className="h-[2px] w-6 bg-white"
-              animate={{ opacity: mobileOpen ? 0 : 1 }}
-              transition={{ duration: 0.2 }}
-            />
-            <motion.span
-              className="h-[2px] w-6 bg-white"
-              animate={
-                mobileOpen
-                  ? { rotate: -45, y: -7 }
-                  : { rotate: 0, y: 0 }
-              }
-              transition={{ duration: 0.25 }}
-            />
-          </button>
+          {/* Theme toggle + Hamburger (mobile) */}
+          <div className="flex md:hidden items-center gap-3">
+            <ThemeToggle />
+            <button
+              type="button"
+              aria-label="Toggle menu"
+              aria-expanded={mobileOpen}
+              onClick={() => setMobileOpen((v) => !v)}
+              className="relative z-[10000] flex h-9 w-9 flex-col items-center justify-center gap-[5px]"
+            >
+              <motion.span
+                className="h-[2px] w-6 bg-white"
+                animate={
+                  mobileOpen
+                    ? { rotate: 45, y: 7 }
+                    : { rotate: 0, y: 0 }
+                }
+                transition={{ duration: 0.25 }}
+              />
+              <motion.span
+                className="h-[2px] w-6 bg-white"
+                animate={{ opacity: mobileOpen ? 0 : 1 }}
+                transition={{ duration: 0.2 }}
+              />
+              <motion.span
+                className="h-[2px] w-6 bg-white"
+                animate={
+                  mobileOpen
+                    ? { rotate: -45, y: -7 }
+                    : { rotate: 0, y: 0 }
+                }
+                transition={{ duration: 0.25 }}
+              />
+            </button>
+          </div>
         </nav>
       </header>
 
@@ -130,8 +137,7 @@ export default function Navbar() {
             animate={{ y: 0 }}
             exit={{ y: "-100%" }}
             transition={{ duration: 0.45, ease: [0.76, 0, 0.24, 1] }}
-            className="fixed inset-0 z-[9998] flex flex-col md:hidden"
-            style={{ backgroundColor: "#ff2a2a" }}
+            className="fixed inset-0 z-[9998] flex flex-col bg-white transition-colors duration-300 dark:bg-[#0a0a0a] md:hidden"
           >
             <ul className="mt-28 flex flex-1 flex-col items-center justify-start gap-2 px-6">
               {NAV_LINKS.map((item, i) => (
@@ -145,7 +151,7 @@ export default function Navbar() {
                   <a
                     href={`#${item.toLowerCase()}`}
                     onClick={() => setMobileOpen(false)}
-                    className="block w-full py-4 text-center text-3xl font-bold tracking-tight text-white active:opacity-60"
+                    className="block w-full py-4 text-center text-3xl font-bold tracking-tight text-black transition-colors duration-300 hover:text-[#ff2a2a] active:opacity-60 dark:text-white"
                   >
                     {item}
                   </a>
@@ -161,7 +167,7 @@ export default function Navbar() {
                 <a
                   href="#contact"
                   onClick={() => setMobileOpen(false)}
-                  className="block w-full rounded-full border border-white/40 bg-white/10 py-4 text-center text-lg font-semibold text-white backdrop-blur-md"
+                  className="block w-full rounded-full border border-black/15 bg-black/5 py-4 text-center text-lg font-semibold text-black backdrop-blur-md transition-colors duration-300 hover:border-[#ff2a2a]/50 dark:border-white/40 dark:bg-white/10 dark:text-white"
                 >
                   Hire Me
                 </a>

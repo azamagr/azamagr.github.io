@@ -22,11 +22,11 @@ import { motion } from "framer-motion";
  *   <About photoSrc="/media/azam-headshot.jpg" />
  */
 
-export default function About({ photoSrc = "/IMG/pass.png" }) {
+export default function About({ photoSrc = "/IMG/video.png" }) {
   return (
     <section
       id="about"
-      className="relative overflow-hidden bg-[#ff2a2a] pb-32 pt-28 sm:pt-32"
+      className="relative overflow-hidden bg-neutral-100 pb-32 pt-28 transition-colors duration-300 dark:bg-[#0a0a0a] sm:pt-32"
     >
       {/* Scattered pulsing star decorations */}
       <PulseStar className="left-[6%] top-[12%] h-6 w-6" delay={0} />
@@ -94,16 +94,16 @@ export default function About({ photoSrc = "/IMG/pass.png" }) {
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.7, ease: "easeOut", delay: 0.1 }}
         >
-          <h2 className="text-6xl font-black leading-none tracking-tight text-black sm:text-7xl">
+          <h2 className="text-6xl font-black leading-none tracking-tight text-black transition-colors duration-300 dark:text-white sm:text-7xl">
             Hello!
           </h2>
 
-          <p className="mt-6 max-w-xl text-lg font-medium leading-relaxed text-black/90">
+          <p className="mt-6 max-w-xl text-lg font-medium leading-relaxed text-black/90 transition-colors duration-300 dark:text-white/90">
             I am <span className="font-bold">MUHAMMAD AZAM</span>, a BS
             Software Engineering graduate from Virtual University of
             Pakistan.
           </p>
-          <p className="mt-4 max-w-xl text-lg leading-relaxed text-black/80">
+          <p className="mt-4 max-w-xl text-lg leading-relaxed text-black/80 transition-colors duration-300 dark:text-white/70">
             Specialized in designing REST APIs, integrating databases, and
             developing responsive user interfaces.
           </p>
@@ -154,8 +154,8 @@ function PulseStar({ className = "", delay = 0 }) {
   return (
     <motion.svg
       viewBox="0 0 24 24"
-      fill="black"
-      className={`pointer-events-none absolute z-0 ${className}`}
+      fill="currentColor"
+      className={`pointer-events-none absolute z-0 text-black dark:text-white ${className}`}
       animate={{ opacity: [0.25, 0.7, 0.25], scale: [1, 1.15, 1] }}
       transition={{ duration: 2.6, repeat: Infinity, ease: "easeInOut", delay }}
     >

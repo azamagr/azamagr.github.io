@@ -66,8 +66,7 @@ export default function Preloader({ children, onComplete }) {
         {stage !== "done" && (
           <motion.div
             key="preloader-shutter"
-            className="fixed inset-0 z-[100000] flex items-center justify-center overflow-hidden"
-            style={{ backgroundColor: "#ff2a2a" }}
+            className="fixed inset-0 z-[100000] flex items-center justify-center overflow-hidden bg-white transition-colors duration-300 dark:bg-[#0a0a0a]"
             initial={{ y: 0 }}
             animate={{ y: stage === "exiting" ? "-100%" : 0 }}
             exit={{ y: "-100%" }}
@@ -85,7 +84,7 @@ export default function Preloader({ children, onComplete }) {
               {/* Background layer: dark, transparent version of the logo */}
               <span
                 aria-hidden="true"
-                className="block font-black leading-none tracking-tighter text-black/20"
+                className="block font-black leading-none tracking-tighter text-black/15 dark:text-white/15"
                 style={{
                   fontSize: "clamp(2.5rem, 12vw, 9rem)",
                   fontFamily:
@@ -97,7 +96,7 @@ export default function Preloader({ children, onComplete }) {
 
               {/* Foreground layer: white logo, water-fill clip-path reveal */}
               <motion.span
-                className="absolute inset-0 block font-black leading-none tracking-tighter text-white"
+                className="absolute inset-0 block font-black leading-none tracking-tighter text-black dark:text-white"
                 style={{
                   fontSize: "clamp(2.5rem, 12vw, 9rem)",
                   fontFamily:
