@@ -88,7 +88,7 @@ export default function Footer() {
             style={{ clipPath, x }}
             className="select-none whitespace-nowrap text-center text-[15vw] font-black leading-none tracking-tighter text-black transition-colors duration-300 dark:text-white sm:text-[10vw]"
           >
-            muhammad azam
+            @m.azamagr
           </motion.h2>
         </div>
       </div>
