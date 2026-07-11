@@ -12,18 +12,15 @@ import { ArrowDown } from "lucide-react";
  *  - Background: your "video.png" photo sits behind everything, dimmed
  *    under the brand-red tint + gradient so text stays legible.
  *  - Left: heading + subheading + two CTAs.
- *  - Right: your "pass.png" cutout photo, full height, anchored to the
- *    bottom-right edge (sharp, not dimmed).
+ *  - No separate foreground photo here — your other photo ("pass.png")
+ *    is used in the About section's ID badge instead.
  *  - Bottom-center bouncing scroll arrow, desktop-only.
  *
  * Usage:
- *   <Hero bgImageSrc="/IMG/video.png" photoSrc="/IMG/pass.png" />
+ *   <Hero bgImageSrc="/IMG/video.png" />
  */
 
-export default function Hero({
-  bgImageSrc = "/IMG/video.png",
-  photoSrc = "/IMG/passs.png",
-}) {
+export default function Hero({ bgImageSrc = "/IMG/video.png" }) {
   return (
     <section
       id="home"
@@ -42,13 +39,12 @@ export default function Hero({
       <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
 
       {/* Content */}
-      <div className="relative z-20 mx-auto flex h-full w-full max-w-7xl flex-col items-center justify-center gap-10 px-6 sm:px-10 md:flex-row md:items-end md:justify-between md:gap-6">
-        {/* Left: copy */}
+      <div className="relative z-20 mx-auto flex h-full w-full max-w-7xl items-center justify-center px-6 sm:px-10">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: "easeOut" }}
-          className="max-w-xl pb-0 pt-24 text-center md:pb-24 md:pt-0 md:text-left"
+          className="max-w-2xl text-center"
         >
           <h1 className="font-black leading-[0.95] tracking-tight text-white">
             <span className="block text-3xl sm:text-4xl md:text-5xl">
@@ -65,13 +61,13 @@ export default function Hero({
             </span>
           </h1>
 
-          <p className="mx-auto mt-6 max-w-md text-base leading-relaxed text-white/85 sm:text-lg md:mx-0">
+          <p className="mx-auto mt-6 max-w-md text-base leading-relaxed text-white/85 sm:text-lg">
             Software Engineering graduate specializing in building full-stack
             web applications using React.js, Node.js, Express.js, and
             MongoDB, with a focus on performance and scalability.
           </p>
 
-          <div className="mt-9 flex flex-wrap items-center justify-center gap-4 md:justify-start">
+          <div className="mt-9 flex flex-wrap items-center justify-center gap-4">
             <a
               href="#projects"
               className="rounded-full bg-white px-7 py-3.5 text-sm font-semibold text-black transition-transform duration-300 hover:scale-105"
@@ -85,20 +81,6 @@ export default function Hero({
               Contact Me
             </a>
           </div>
-        </motion.div>
-
-        {/* Right: large cutout photo, anchored bottom */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut", delay: 0.15 }}
-          className="relative h-[55%] w-full max-w-sm md:h-full md:max-w-md lg:max-w-lg"
-        >
-          <img
-            src={photoSrc}
-            alt="Muhammad Azam"
-            className="absolute bottom-0 left-1/2 h-full w-auto max-w-none -translate-x-1/2 object-contain object-bottom drop-shadow-[0_25px_40px_rgba(0,0,0,0.35)] md:left-auto md:right-0 md:translate-x-0"
-          />
         </motion.div>
       </div>
 
