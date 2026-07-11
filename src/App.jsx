@@ -15,8 +15,8 @@ export default function App() {
     <ThemeProvider>
       <Preloader>
         <Navbar />
-        <Hero photoSrc="/IMG/video.png" />
-        <About photoSrc="/IMG/pass.png" />
+        <Hero bgImageSrc="/IMG/video.png" photoSrc="/IMG/pass.png" />
+        <About photoSrc="/IMG/azam.jpg" />
         <ProcessTimeline />
         <SkillsMatrix />
         <Projects />

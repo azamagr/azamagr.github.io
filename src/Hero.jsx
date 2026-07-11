@@ -9,27 +9,34 @@ import { ArrowDown } from "lucide-react";
  * your cutout photo large on the right side (not circular, not blurred —
  * a real subject cutout like the "Leeshark" reference you shared).
  *
- *  - Background: solid brand red in dark mode (matches your reference),
- *    clean white/light in bright mode — fully driven by the site-wide
- *    theme toggle.
+ *  - Background: your "video.png" photo sits behind everything, dimmed
+ *    under the brand-red tint + gradient so text stays legible.
  *  - Left: heading + subheading + two CTAs.
- *  - Right: your photo, full height, anchored to the bottom-right edge.
- *    For the best look, use a PNG with the background already removed
- *    (transparent background) — free tools like remove.bg work well.
+ *  - Right: your "pass.png" cutout photo, full height, anchored to the
+ *    bottom-right edge (sharp, not dimmed).
  *  - Bottom-center bouncing scroll arrow, desktop-only.
  *
  * Usage:
- *   <Hero photoSrc="/images/profile.png" />
- * Put your cutout photo at public/images/profile.png (PNG with transparent
- * background recommended, but a normal JPG also works).
+ *   <Hero bgImageSrc="/IMG/video.png" photoSrc="/IMG/pass.png" />
  */
 
-export default function Hero({ photoSrc = "/IMG/video.png" }) {
+export default function Hero({
+  bgImageSrc = "/IMG/video.png",
+  photoSrc = "/IMG/pass.png",
+}) {
   return (
     <section
       id="home"
       className="relative flex h-screen w-full items-center overflow-hidden bg-[#ff2a2a]"
     >
+      {/* Background photo, dimmed under the red tint */}
+      <img
+        src={bgImageSrc}
+        alt=""
+        className="absolute inset-0 h-full w-full object-cover opacity-30"
+      />
+      {/* Red tint so the background photo still reads as part of the brand panel */}
+      <div className="absolute inset-0 bg-[#ff2a2a]/70" />
       {/* Subtle depth vignette so text stays legible over the flat color */}
       <div className="absolute inset-0 bg-gradient-to-r from-black/25 via-transparent to-transparent" />
       <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
