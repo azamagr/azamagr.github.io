@@ -16,7 +16,7 @@ export default function App() {
       <Preloader>
         <Navbar />
         <Hero bgImageSrc="/IMG/video.png" />
-        <About photoSrc="/IMG/azam.jpg" />
+        <About photoSrc="/IMG/pass.png" />
         <ProcessTimeline />
         <SkillsMatrix />
         <Projects />
