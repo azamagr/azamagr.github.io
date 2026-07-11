@@ -21,8 +21,7 @@ import { ArrowDown } from "lucide-react";
  */
 
 export default function Hero({
-  bgImageSrc = "/IMG/video.png",
-  photoSrc = "/IMG/pass.png",
+  bgImageSrc = "/IMG/video.png"
 }) {
   return (
     <section
