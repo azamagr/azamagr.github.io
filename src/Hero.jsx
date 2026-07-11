@@ -24,7 +24,7 @@ export default function Hero({ bgImageSrc = "/IMG/video.png" }) {
   return (
     <section
       id="home"
-      className="relative flex h-screen w-full items-center overflow-hidden bg-[#ff2a2a]"
+        className="relative flex h-screen w-full items-center justify-start overflow-hidden bg-[#ff2a2a]"
     >
       {/* Background photo, dimmed under the red tint */}
       <img
