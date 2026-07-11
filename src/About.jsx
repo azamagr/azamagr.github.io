@@ -22,7 +22,7 @@ import { motion } from "framer-motion";
  *   <About photoSrc="/media/azam-headshot.jpg" />
  */
 
-export default function About({ photoSrc = "/media/azam-headshot.jpg" }) {
+export default function About({ photoSrc = "/IMG/pass.png" }) {
   return (
     <section
       id="about"

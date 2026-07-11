@@ -24,7 +24,7 @@ import { ArrowDown } from "lucide-react";
  * background recommended, but a normal JPG also works).
  */
 
-export default function Hero({ photoSrc = "/images/profile.png" }) {
+export default function Hero({ photoSrc = "/IMG/video.png" }) {
   return (
     <section
       id="home"
