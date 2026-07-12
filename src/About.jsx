@@ -80,7 +80,7 @@ export default function About({ photoSrc = "/media/azam-headshot.jpg" }) {
                   MUHAMMAD AZAM
                 </p>
                 <p className="mt-0.5 text-[11px] font-semibold uppercase tracking-[0.2em] text-[#ff2a2a]">
-                  Full Stack Developer
+                  MERN Stack Developer
                 </p>
               </div>
             </motion.div>
