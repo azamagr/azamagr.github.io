@@ -77,13 +77,13 @@ export default function Contact({ onSubmit }) {
           </div>
 
           <div className="mt-12 flex items-center gap-5">
-            <MagneticIcon href="https://www.linkedin.com/in/azamagr/" label="LinkedIn">
+            <MagneticIcon href="https://linkedin.com/" label="LinkedIn">
               <Linkedin className="h-5 w-5" />
             </MagneticIcon>
-            <MagneticIcon href="https://github.com/azamagr/" label="GitHub">
+            <MagneticIcon href="https://github.com/" label="GitHub">
               <Github className="h-5 w-5" />
             </MagneticIcon>
-            <MagneticIcon href="https://azamagr.github.io/" label="Portfolio">
+            <MagneticIcon href="#" label="Portfolio">
               <Globe className="h-5 w-5" />
             </MagneticIcon>
           </div>

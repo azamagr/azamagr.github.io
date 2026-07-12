@@ -30,7 +30,7 @@ import React, {
 const ThemeContext = createContext(null);
 
 export function ThemeProvider({ children }) {
-  const [theme, setTheme] = useState("light");
+  const [theme, setTheme] = useState("dark");
 
   // Resolve initial theme once on mount (localStorage → OS preference → dark)
   useEffect(() => {

@@ -91,7 +91,7 @@ export default function Preloader({ children, onComplete }) {
                     "'Helvetica Neue', Arial, ui-sans-serif, sans-serif",
                 }}
               >
-                Azam Agr.
+                Azam.
               </span>
 
               {/* Foreground layer: white logo, water-fill clip-path reveal */}
@@ -106,7 +106,7 @@ export default function Preloader({ children, onComplete }) {
                 animate={{ clipPath: "inset(0% 0% 0% 0%)" }}
                 transition={{ duration: FILL_DURATION, ease: EASE_FILL }}
               >
-                Azam Agr.
+                Azam.
               </motion.span>
             </motion.div>
           </motion.div>
