@@ -26,25 +26,43 @@ const CERTIFICATIONS = [
     title: "Full Stack Web Development",
     issuer: "IDEO College of Technology",
     date: "May 8, 2024",
-    link: "#",
+    link: "/certificates/Web_Development.JPG",
+  },
+  {
+    title: "Python Essential Training",
+    issuer: "LinkedIn Learning",
+    date: "August 28, 2024",
+    link: "/certificates/Python_Essential_Training_Certificate.png",
+  },
+  {
+    title: "Python Object-Oriented Programming",
+    issuer: "LinkedIn Learning",
+    date: "August 27, 2024",
+    link: "/certificates/Python_Object-Oriented_Programming_Certificate.png",
+  },
+  {
+    title: "Learning the Python 3 Standard Library",
+    issuer: "LinkedIn Learning",
+    date: "August 30, 2024",
+    link: "/certificates/Python_3_Standard_Library_Certificate.png",
   },
   {
     title: "CCNAv7: Introduction to Networks",
     issuer: "Cisco Networking Academy",
     date: "June 2024",
-    link: "#",
+    link: "/certificates/Introduction_to_Networks_Certificate.png",
   },
   {
     title: "WordPress",
     issuer: "Digiskill.pk",
     date: "Nov 2023 – Feb 2024",
-    link: "#",
+    link: "/certificates/WordPress_Certififcate.png",
   },
   {
     title: "Digital Literacy",
     issuer: "Digiskill.pk",
     date: "Oct 2020 – Jan 2021",
-    link: "#",
+    link: "/certificates/Digital-Literacy_Certificate.png",
   },
 ];
 

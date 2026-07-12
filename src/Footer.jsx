@@ -60,7 +60,7 @@ export default function Footer() {
             </ul>
           </FooterColumn>
 
-          <FooterColumn label="Education & Certifications">
+          {/* <FooterColumn label="Education & Certifications">
             <ul className="space-y-2.5">
               <li className="text-sm text-black/60 dark:text-white/60">
                 BS Software Engineering Graduate
@@ -69,7 +69,7 @@ export default function Footer() {
                 freeCodeCamp Certified Back-End Developer
               </li>
             </ul>
-          </FooterColumn>
+          </FooterColumn> */}
 
           <FooterColumn label="Availability" align="sm:text-right">
             <p className="text-sm text-black/60 dark:text-white/60">
@@ -88,7 +88,7 @@ export default function Footer() {
             style={{ clipPath, x }}
             className="select-none whitespace-nowrap text-center text-[15vw] font-black leading-none tracking-tighter text-black transition-colors duration-300 dark:text-white sm:text-[10vw]"
           >
-            muhammad azam
+            <a href="https://www.google.com/search?q=m.azamagr&oq=m.&gs_lcrp=EgZjaHJvbWUqCAgAEEUYJxg7MggIABBFGCcYOzIGCAEQRRg5Mg0IAhAAGJECGIAEGIoFMg0IAxAAGIMBGLEDGIAEMgcIBBAAGIAEMgcIBRAAGIAEMgcIBhAAGI8CMgcIBxAAGI8CMgcICBAAGI8C0gEJMjI0OWowajE1qAIMsAIB8QXlbyIRsMzluQ&sourceid=chrome&source=chrome.rb&ie=UTF-8">m.azamagr</a> 
           </motion.h2>
         </div>
       </div>
@@ -109,7 +109,7 @@ export default function Footer() {
 
           <div className="flex items-center gap-5">
             <a
-              href="https://github.com/"
+              href="https://github.com/azamagr/"
               target="_blank"
               rel="noreferrer"
               aria-label="GitHub"
@@ -118,7 +118,7 @@ export default function Footer() {
               <Github className="h-5 w-5 transition-transform duration-300 group-hover:-translate-y-0.5" />
             </a>
             <a
-              href="https://linkedin.com/"
+              href="https://www.linkedin.com/in/azamagr/"
               target="_blank"
               rel="noreferrer"
               aria-label="LinkedIn"

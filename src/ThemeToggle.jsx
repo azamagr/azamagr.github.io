@@ -16,13 +16,13 @@ import { useTheme } from "./ThemeContext";
 
 export default function ThemeToggle({ className = "" }) {
   const { theme, toggleTheme } = useTheme();
-  const isDark = theme === "dark";
+  const isLight = theme === "light";
 
   return (
     <button
       type="button"
       onClick={toggleTheme}
-      aria-label={isDark ? "Switch to bright theme" : "Switch to dark theme"}
+      aria-label={isLight ? "Switch to bright theme" : "Switch to dark theme"}
       className={`relative flex h-10 w-10 items-center justify-center overflow-hidden rounded-full border transition-colors duration-300 ${
         isDark
           ? "border-white/20 bg-white/10 text-white hover:border-[#ff2a2a]/60"
