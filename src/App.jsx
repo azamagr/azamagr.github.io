@@ -4,6 +4,8 @@ import Preloader from "./Preloader";
 import Navbar from "./Navbar";
 import Hero from "./Hero";
 import About from "./About";
+import Education from "./Education";
+import Certifications from "./Certifications";
 import ProcessTimeline from "./ProcessTimeline";
 import Projects from "./Projects";
 import SkillsMatrix from "./SkillsMatrix";
@@ -17,6 +19,8 @@ export default function App() {
         <Navbar />
         <Hero bgImageSrc="/IMG/video.png" />
         <About photoSrc="/IMG/pass.png" />
+        <Education />
+        <Certifications />
         <ProcessTimeline />
         <SkillsMatrix />
         <Projects />

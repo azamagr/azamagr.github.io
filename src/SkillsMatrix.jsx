@@ -45,6 +45,8 @@ const CATEGORIES = [
     items: [
       { name: "MongoDB", note: "Schema design & aggregation pipelines" },
       { name: "Mongoose", note: "ODM modeling for MERN applications" },
+      { name: "MySQL", note: "Relational database design & queries" },
+      { name: "SQL", note: "Query writing & database coursework" },
     ],
   },
   {
@@ -53,6 +55,17 @@ const CATEGORIES = [
       { name: "Git / GitHub", note: "Version control across all repositories" },
       { name: "MVC", note: "Architectural pattern applied in full-stack apps" },
       { name: "OOP", note: "Core Software Engineering coursework & practice" },
+    ],
+  },
+  {
+    name: "Other Languages & Tools",
+    items: [
+      { name: "PHP", note: "Used in early full-stack projects (Job Application Form)" },
+      { name: "Laravel", note: "PHP framework used alongside WordPress work" },
+      { name: "C++", note: "Core OOP & data structures coursework" },
+      { name: "Python", note: "General-purpose scripting & coursework" },
+      { name: "WordPress", note: "Digiskill.pk certified, Nov 2023 – Feb 2024" },
+      { name: "VS Code", note: "Primary development environment" },
     ],
   },
 ];

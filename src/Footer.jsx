@@ -88,7 +88,7 @@ export default function Footer() {
             style={{ clipPath, x }}
             className="select-none whitespace-nowrap text-center text-[15vw] font-black leading-none tracking-tighter text-black transition-colors duration-300 dark:text-white sm:text-[10vw]"
           >
-            <a href="https://www.google.com/search?q=m.azamagr&oq=m.azamagr&gs_lcrp=EgZjaHJvbWUqBggAEEUYOzIGCAAQRRg7MgoIARAAGAUYDRgeMgoIAhAAGAgYDRgeMgoIAxAAGAgYDRgeMgoIBBAAGAgYDRgeMgoIBRAAGAgYDRgeMgoIBhAAGAgYDRgeMgYIBxBFGDzSAQg2MzA1ajBqOagCBrACAfEFNGY7NJDJrUI&sourceid=chrome&source=chrome.ob&ie=UTF-8"> @m.azamagr </a>
+            muhammad azam
           </motion.h2>
         </div>
       </div>
