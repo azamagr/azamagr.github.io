@@ -20,7 +20,7 @@ const CERTIFICATIONS = [
     title: "Back End Development and APIs",
     issuer: "freeCodeCamp",
     date: "October 17, 2025",
-    link: "#",
+    link: "/certificates/APIs Certificate.png",
   },
   {
     title: "Full Stack Web Development",
