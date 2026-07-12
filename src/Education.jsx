@@ -17,7 +17,6 @@ const EDUCATION = [
     degree: "BS Software Engineering",
     institute: "Virtual University of Pakistan",
     duration: "2021 – Present",
-    detail: "Current CGPA: 2.24 / 4.00",
     courses: [
       "Data Structures",
       "OOP",
@@ -35,13 +34,11 @@ const EDUCATION = [
     degree: "FSc. Pre-Engineering",
     institute: "Govt. Islamia Degree College, Kasur (BISE Lahore)",
     duration: "2019 – 2021",
-    detail: "Marks: 500 / 1100",
   },
   {
     degree: "Matriculation",
     institute: "Govt. Islamia High School, Kasur (BISE Lahore)",
     duration: "2017 – 2019",
-    detail: "Marks: 705 / 1100",
   },
 ];
 
@@ -90,9 +87,6 @@ export default function Education() {
                 </div>
                 <p className="mt-1 text-sm text-black/60 dark:text-white/60">
                   {edu.institute}
-                </p>
-                <p className="mt-2 text-sm font-medium text-black/70 dark:text-white/70">
-                  {edu.detail}
                 </p>
 
                 {edu.courses && (

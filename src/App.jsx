@@ -19,11 +19,11 @@ export default function App() {
         <Navbar />
         <Hero bgImageSrc="/IMG/video.png" />
         <About photoSrc="/IMG/pass.png" />
-        <Education />
-        <Certifications />
         <ProcessTimeline />
         <SkillsMatrix />
         <Projects />
+        <Education />
+        <Certifications />
         <Contact />
         <Footer />
       </Preloader>
