@@ -28,6 +28,24 @@ const CERTIFICATIONS = [
     date: "May 8, 2024",
     link: "#",
   },
+    {
+    title: "Python Essential Training",
+    issuer: "LinkedIn Learning",
+    date: "August 28, 2024",
+    link: "/certificates/Python Essential Training Certificate.png",
+  },
+  {
+    title: "Python Object-Oriented Programming",
+    issuer: "LinkedIn Learning",
+    date: "August 27, 2024",
+    link: "/certificates/Python Object-Oriented Programming Certificate.png",
+  },
+  {
+    title: "Learning the Python 3 Standard Library",
+    issuer: "LinkedIn Learning",
+    date: "August 30, 2024",
+    link: "/certificates/Python 3 Standard Library Certificate.png",
+  },
   {
     title: "CCNAv7: Introduction to Networks",
     issuer: "Cisco Networking Academy",

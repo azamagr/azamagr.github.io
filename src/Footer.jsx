@@ -60,7 +60,7 @@ export default function Footer() {
             </ul>
           </FooterColumn>
 
-          {/* <FooterColumn label="Education & Certifications">
+          <FooterColumn label="Education & Certifications">
             <ul className="space-y-2.5">
               <li className="text-sm text-black/60 dark:text-white/60">
                 BS Software Engineering Graduate
@@ -69,7 +69,7 @@ export default function Footer() {
                 freeCodeCamp Certified Back-End Developer
               </li>
             </ul>
-          </FooterColumn> */}
+          </FooterColumn>
 
           <FooterColumn label="Availability" align="sm:text-right">
             <p className="text-sm text-black/60 dark:text-white/60">
