@@ -33,25 +33,25 @@ const STEPS = [
   {
     id: "01",
     title: "Define",
-    desc: "Understanding requirements and system architecture (MVC, OOP).",
+    desc: "I start by understanding the real problem — gathering requirements, mapping user flows, and planning the system architecture around MVC and OOP principles so the codebase stays organized and easy to scale from day one.",
     align: "left",
   },
   {
     id: "02",
     title: "Design",
-    desc: "Crafting responsive UI/UX using React.js, Bootstrap, and Tailwind.",
+    desc: "Wireframes turn into responsive, accessible interfaces built with React.js, Bootstrap, and Tailwind CSS — focused on clean layout, consistent spacing, and interactions that feel intuitive across every screen size.",
     align: "right",
   },
   {
     id: "03",
     title: "Build",
-    desc: "Developing robust REST APIs with Node.js, Express.js, and MongoDB.",
+    desc: "The frontend gets connected to a robust backend — REST APIs built with Node.js and Express.js, data modeled and persisted in MongoDB, with authentication, validation, and error handling wired in from the start.",
     align: "left",
   },
   {
     id: "04",
     title: "Launch",
-    desc: "Testing, version control via Git/GitHub, and deploying scalable web solutions.",
+    desc: "Every feature is tested, code is versioned and reviewed through Git/GitHub, and the final build is deployed to a scalable hosting environment — with monitoring in place so it keeps running smoothly after launch.",
     align: "right",
   },
 ];
@@ -153,7 +153,7 @@ function ProcessCard({ id, title, desc, align }) {
             : "0 10px 30px rgba(0,0,0,0.08)",
         }}
         transition={{ duration: 0.4, ease: "easeOut" }}
-        className="relative w-[85%] max-w-xs rounded-2xl border border-black/10 px-6 pb-6 pt-5 dark:border-white/10 sm:max-w-sm"
+        className="relative w-[90%] max-w-sm rounded-2xl border border-black/10 px-6 pb-6 pt-5 dark:border-white/10 sm:max-w-md"
       >
         {/* Hole-punch detail, like a luggage tag / badge */}
         <div
@@ -190,25 +190,39 @@ function ProcessCard({ id, title, desc, align }) {
 }
 
 function SketchArrow({ className = "" }) {
-  // A loose, hand-drawn-feeling squiggly arrow pointing at the headline.
+  // A more distinctive, hand-drawn curled arrow: it draws itself in once
+  // scrolled into view, then keeps a gentle continuous wobble/float so it
+  // feels alive rather than static.
   return (
-    <svg
-      viewBox="0 0 100 100"
+    <motion.svg
+      viewBox="0 0 100 110"
       fill="none"
       className={className}
       strokeLinecap="round"
       strokeLinejoin="round"
+      animate={{ rotate: [-6, 4, -6], y: [0, -6, 0] }}
+      transition={{ duration: 3.2, repeat: Infinity, ease: "easeInOut" }}
     >
-      <path
-        d="M8 70 C 25 75, 30 40, 48 45 C 62 48, 58 20, 78 15"
+      {/* Curled squiggle body */}
+      <motion.path
+        d="M8 92 C 4 68, 30 78, 28 56 C 26 34, 55 46, 50 24 C 47 10, 60 4, 70 10"
         stroke="currentColor"
-        strokeWidth="3"
+        strokeWidth="3.5"
+        initial={{ pathLength: 0, opacity: 0 }}
+        whileInView={{ pathLength: 1, opacity: 1 }}
+        viewport={{ once: true, amount: 0.6 }}
+        transition={{ duration: 1.1, ease: "easeInOut" }}
       />
-      <path
-        d="M62 12 L79 15 L73 30"
+      {/* Arrowhead */}
+      <motion.path
+        d="M56 6 L71 10 L64 24"
         stroke="currentColor"
-        strokeWidth="3"
+        strokeWidth="3.5"
+        initial={{ pathLength: 0, opacity: 0 }}
+        whileInView={{ pathLength: 1, opacity: 1 }}
+        viewport={{ once: true, amount: 0.6 }}
+        transition={{ duration: 0.4, ease: "easeOut", delay: 1.05 }}
       />
-    </svg>
+    </motion.svg>
   );
 }

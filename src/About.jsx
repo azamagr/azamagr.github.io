@@ -99,9 +99,9 @@ export default function About({ photoSrc = "/media/azam-headshot.jpg" }) {
           </h2>
 
           <p className="mt-6 max-w-xl text-lg font-medium leading-relaxed text-black/90 transition-colors duration-300 dark:text-white/90">
-            I am <span className="font-bold">MUHAMMAD AZAM</span>, a BS
-            Software Engineering graduate from Virtual University of
-            Pakistan.
+            I am <span className="font-bold">MUHAMMAD AZAM</span>, a MERN
+            Stack Developer who loves turning ideas into fast, functional
+            products.
           </p>
           <p className="mt-4 max-w-xl text-lg leading-relaxed text-black/80 transition-colors duration-300 dark:text-white/70">
             Specialized in designing REST APIs, integrating databases, and
