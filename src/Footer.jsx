@@ -60,7 +60,7 @@ export default function Footer() {
             </ul>
           </FooterColumn>
 
-          <FooterColumn label="Education & Certifications">
+          {/* <FooterColumn label="Education & Certifications">
             <ul className="space-y-2.5">
               <li className="text-sm text-black/60 dark:text-white/60">
                 BS Software Engineering Graduate
@@ -69,7 +69,7 @@ export default function Footer() {
                 freeCodeCamp Certified Back-End Developer
               </li>
             </ul>
-          </FooterColumn>
+          </FooterColumn> */}
 
           <FooterColumn label="Availability" align="sm:text-right">
             <p className="text-sm text-black/60 dark:text-white/60">
@@ -88,7 +88,7 @@ export default function Footer() {
             style={{ clipPath, x }}
             className="select-none whitespace-nowrap text-center text-[15vw] font-black leading-none tracking-tighter text-black transition-colors duration-300 dark:text-white sm:text-[10vw]"
           >
-            muhammad azam
+            <a href="https://www.google.com/search?q=m.azamagr&oq=m.azamagr&gs_lcrp=EgZjaHJvbWUyBggAEEUYOTIGCAEQRRg8MgYIAhBFGDwyBggDEEUYPNIBCDMxMjFqMGo3qAIAsAIA&sourceid=chrome&source=chrome.ob&ie=UTF-8">m.azamagr</a>
           </motion.h2>
         </div>
       </div>
