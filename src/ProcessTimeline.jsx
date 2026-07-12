@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { motion, useScroll, useInView } from "framer-motion";
 import { useTheme } from "./ThemeContext";
 
@@ -79,12 +79,7 @@ export default function ProcessTimeline() {
           How I Work
         </span>
 
-        <div className="relative mt-6 inline-block">
-          <h2 className="text-4xl font-black leading-tight tracking-tight text-black transition-colors duration-300 dark:text-white sm:text-5xl">
-            Let us show you how we drive your brand to new heights
-          </h2>
-          <SketchArrow className="absolute -right-14 -top-8 hidden h-16 w-16 text-[#ff2a2a] sm:block" />
-        </div>
+        <HeadlineWithArrow />
       </div>
 
       {/* Timeline */}
@@ -138,8 +133,8 @@ function ProcessCard({ id, title, desc, align }) {
 
   return (
     <div
-      className={`flex w-full ${
-        align === "left" ? "justify-start" : "justify-end"
+      className={`flex w-full flex-col gap-4 ${
+        align === "left" ? "items-start" : "items-end"
       }`}
     >
       <motion.div
@@ -153,7 +148,7 @@ function ProcessCard({ id, title, desc, align }) {
             : "0 10px 30px rgba(0,0,0,0.08)",
         }}
         transition={{ duration: 0.4, ease: "easeOut" }}
-        className="relative w-[90%] max-w-sm rounded-2xl border border-black/10 px-6 pb-6 pt-5 dark:border-white/10 sm:max-w-md"
+        className="relative w-fit rounded-2xl border border-black/10 px-8 py-5 dark:border-white/10"
       >
         {/* Hole-punch detail, like a luggage tag / badge */}
         <div
@@ -171,28 +166,63 @@ function ProcessCard({ id, title, desc, align }) {
           {id}
         </span>
         <h3
-          className={`mt-1 text-2xl font-black tracking-tight transition-colors duration-300 ${
+          className={`mt-1 whitespace-nowrap text-2xl font-black tracking-tight transition-colors duration-300 ${
             inView ? "text-white" : isDark ? "text-white" : "text-black"
           }`}
         >
           {title}
         </h3>
-        <p
-          className={`mt-2 text-sm leading-relaxed transition-colors duration-300 ${
-            inView ? "text-white/90" : isDark ? "text-white/60" : "text-black/60"
-          }`}
-        >
-          {desc}
-        </p>
       </motion.div>
+
+      {/* Description sits outside the compact tag, with room to breathe */}
+      <p
+        className={`max-w-sm text-sm leading-relaxed transition-colors duration-300 sm:max-w-md ${
+          align === "left" ? "text-left" : "text-right"
+        } ${isDark ? "text-white/60" : "text-black/60"}`}
+      >
+        {desc}
+      </p>
     </div>
   );
 }
 
-function SketchArrow({ className = "" }) {
-  // A more distinctive, hand-drawn curled arrow: it draws itself in once
-  // scrolled into view, then keeps a gentle continuous wobble/float so it
-  // feels alive rather than static.
+function HeadlineWithArrow() {
+  const wrapRef = useRef(null);
+  const [pos, setPos] = useState({ x: 0, y: 0 });
+
+  const handleMouseMove = (e) => {
+    const el = wrapRef.current;
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    // Normalize cursor position within the block to a small tilt/offset range
+    const relX = (e.clientX - rect.left) / rect.width - 0.5;
+    const relY = (e.clientY - rect.top) / rect.height - 0.5;
+    setPos({ x: relX * 16, y: relY * 16 });
+  };
+
+  const reset = () => setPos({ x: 0, y: 0 });
+
+  return (
+    <div
+      ref={wrapRef}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={reset}
+      className="relative mt-6 inline-block"
+    >
+      <h2 className="text-4xl font-black leading-tight tracking-tight text-black transition-colors duration-300 dark:text-white sm:text-5xl">
+        Let us show you how we drive your brand to new heights
+      </h2>
+      <SketchArrow
+        pos={pos}
+        className="absolute -right-14 -top-8 hidden h-16 w-16 text-[#ff2a2a] sm:block"
+      />
+    </div>
+  );
+}
+
+function SketchArrow({ className = "", pos = { x: 0, y: 0 } }) {
+  // Draws itself in once scrolled into view, then actually follows the
+  // cursor as it moves around the headline (not a fixed auto-loop).
   return (
     <motion.svg
       viewBox="0 0 100 110"
@@ -200,8 +230,8 @@ function SketchArrow({ className = "" }) {
       className={className}
       strokeLinecap="round"
       strokeLinejoin="round"
-      animate={{ rotate: [-6, 4, -6], y: [0, -6, 0] }}
-      transition={{ duration: 3.2, repeat: Infinity, ease: "easeInOut" }}
+      animate={{ x: pos.x, y: pos.y, rotate: pos.x * 0.8 }}
+      transition={{ type: "spring", stiffness: 150, damping: 12, mass: 0.4 }}
     >
       {/* Curled squiggle body */}
       <motion.path
