@@ -96,20 +96,38 @@ const PROJECTS = [
     demo: "https://azamagr.github.io/Timestamp_Microservice/",
   },
   {
-    id: "ui-suite",
-    title: "Responsive UI Frontend UI Suite",
-    meta: "2023 – 2024",
-    category: "Frontend",
-    desc: "Client and clone frontend builds focused on responsive layout systems.",
-    tags: ["Flexbox", "Grid", "jQuery"],
-    github: "https://github.com/azamagr",
-    subGrid: [
-      "Watch X",
-      "J. Clothing",
-      "BAROQUE",
-      "Chat Box",
-      "Education Website",
-      "GCU Home Page",
+  id: "ui-suite",
+  title: "Responsive UI Frontend UI Suite",
+  meta: "2023 – 2024",
+  category: "Frontend",
+  desc: "Client and clone frontend builds focused on responsive layout systems.",
+  tags: ["HTML5", "CSS3", "JavaScript", "Bootstrap", "jQuery"],
+  github: "https://github.com/azamagr",
+  subGrid: [
+      {
+        name: "Watch X",
+        demo: "https://azamagr.github.io/WatchX/",
+      },
+      {
+        name: "J. Clothing",
+        demo: "https://azamagr.github.io/J_dot/",
+      },
+      {
+        name: "BAROQUE",
+        demo: "https://azamagr.github.io/me_BAROUQE/",
+      },
+      {
+        name: "Chat Box",
+        demo: "https://azamagr.github.io/Chat_Box/",
+      },
+      {
+        name: "Education Website",
+        demo: "https://azamagr.github.io/EDU_Website/",
+      },
+      {
+        name: "GCU Home Page",
+        demo: "https://azamagr.github.io/GCU_Form/",
+      },
     ],
   },
 ];
