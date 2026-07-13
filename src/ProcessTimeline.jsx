@@ -133,8 +133,8 @@ function ProcessCard({ id, title, desc, align }) {
 
   return (
     <div
-      className={`flex w-full flex-col gap-4 ${
-        align === "left" ? "items-start" : "items-end"
+      className={`flex w-full ${
+        align === "left" ? "justify-start" : "justify-end"
       }`}
     >
       <motion.div
@@ -148,8 +148,17 @@ function ProcessCard({ id, title, desc, align }) {
             : "0 10px 30px rgba(0,0,0,0.08)",
         }}
         transition={{ duration: 0.4, ease: "easeOut" }}
-        className="relative w-fit rounded-2xl border border-black/10 px-8 py-5 dark:border-white/10"
+        className="relative w-[92%] max-w-sm overflow-hidden rounded-2xl border border-black/10 p-7 dark:border-white/10 sm:max-w-md sm:p-8"
       >
+        {/* Large ghost number watermark, for a distinctive premium feel */}
+        <span
+          className={`pointer-events-none absolute -bottom-6 -right-2 text-[7rem] font-black leading-none transition-colors duration-300 sm:text-[8.5rem] ${
+            inView ? "text-white/10" : isDark ? "text-white/[0.04]" : "text-black/[0.04]"
+          }`}
+        >
+          {id}
+        </span>
+
         {/* Hole-punch detail, like a luggage tag / badge */}
         <div
           className={`absolute -top-3 h-6 w-6 rounded-full border-4 border-white dark:border-[#0a0a0a] ${
@@ -159,34 +168,27 @@ function ProcessCard({ id, title, desc, align }) {
         />
 
         <span
-          className={`text-xs font-black tracking-[0.2em] transition-colors duration-300 ${
+          className={`relative text-xs font-black tracking-[0.2em] transition-colors duration-300 ${
             inView ? "text-white/70" : isDark ? "text-white/40" : "text-black/40"
           }`}
         >
           {id}
         </span>
         <h3
-          className={`mt-1 whitespace-nowrap text-2xl font-black tracking-tight transition-colors duration-300 ${
+          className={`relative mt-1 text-2xl font-black tracking-tight transition-colors duration-300 ${
             inView ? "text-white" : isDark ? "text-white" : "text-black"
           }`}
         >
           {title}
         </h3>
+        <p
+          className={`relative mt-3 max-w-[26ch] text-sm leading-relaxed transition-colors duration-300 ${
+            inView ? "text-white/90" : isDark ? "text-white/60" : "text-black/60"
+          }`}
+        >
+          {desc}
+        </p>
       </motion.div>
-
-      {/* Description sits outside the compact tag, with room to breathe */}
-      <p
-        className={`max-w-sm text-sm leading-relaxed transition-colors duration-300 sm:max-w-md ${
-          align === "left" ? "text-left" : "text-right"
-        } ${isDark ? "text-white/60" : "text-black/60"}`}
-      >
-        {desc}
-      </p>
-      <p
-  className={`max-w-sm text-sm leading-relaxed ...`}
->
-  {desc}
-</p>
     </div>
   );
 }
