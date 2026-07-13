@@ -140,20 +140,21 @@ function ProcessCard({ id, title, desc, align }) {
       <motion.div
         ref={ref}
         animate={{
-          backgroundColor: inView ? "#ff2a2a" : baseBg,
+          backgroundColor: baseBg,
+          borderColor: inView ? "#ff2a2a" : isDark ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.1)",
           boxShadow: inView
-            ? "0 0 50px rgba(255,42,42,0.55), 0 20px 40px rgba(0,0,0,0.15)"
+            ? "0 15px 40px rgba(255,42,42,0.18)"
             : isDark
             ? "0 10px 30px rgba(0,0,0,0.4)"
             : "0 10px 30px rgba(0,0,0,0.08)",
         }}
         transition={{ duration: 0.4, ease: "easeOut" }}
-        className="relative w-[92%] max-w-sm overflow-hidden rounded-2xl border border-black/10 p-7 dark:border-white/10 sm:max-w-md sm:p-8"
+        className="relative w-[92%] max-w-sm overflow-hidden rounded-2xl border p-7 sm:max-w-md sm:p-8"
       >
         {/* Large ghost number watermark, for a distinctive premium feel */}
         <span
           className={`pointer-events-none absolute -bottom-6 -right-2 text-[7rem] font-black leading-none transition-colors duration-300 sm:text-[8.5rem] ${
-            inView ? "text-white/10" : isDark ? "text-white/[0.04]" : "text-black/[0.04]"
+            isDark ? "text-white/[0.04]" : "text-black/[0.04]"
           }`}
         >
           {id}
@@ -161,7 +162,7 @@ function ProcessCard({ id, title, desc, align }) {
 
         {/* Hole-punch detail, like a luggage tag / badge */}
         <div
-          className={`absolute -top-3 h-6 w-6 rounded-full border-4 border-white dark:border-[#0a0a0a] ${
+          className={`absolute -top-3 h-6 w-6 rounded-full border-4 border-white transition-colors duration-300 dark:border-[#0a0a0a] ${
             align === "left" ? "left-6" : "right-6"
           }`}
           style={{ backgroundColor: inView ? "#ff2a2a" : isDark ? "#333333" : "#e5e5e5" }}
@@ -169,21 +170,22 @@ function ProcessCard({ id, title, desc, align }) {
 
         <span
           className={`relative text-xs font-black tracking-[0.2em] transition-colors duration-300 ${
-            inView ? "text-white/70" : isDark ? "text-white/40" : "text-black/40"
+            inView ? "text-[#ff2a2a]" : isDark ? "text-white/40" : "text-black/40"
           }`}
         >
           {id}
         </span>
+        {/* Only the heading turns red when active — the box itself stays neutral */}
         <h3
           className={`relative mt-1 text-2xl font-black tracking-tight transition-colors duration-300 ${
-            inView ? "text-white" : isDark ? "text-white" : "text-black"
+            inView ? "text-[#ff2a2a]" : isDark ? "text-white" : "text-black"
           }`}
         >
           {title}
         </h3>
         <p
           className={`relative mt-3 max-w-[26ch] text-sm leading-relaxed transition-colors duration-300 ${
-            inView ? "text-white/90" : isDark ? "text-white/60" : "text-black/60"
+            isDark ? "text-white/60" : "text-black/60"
           }`}
         >
           {desc}
