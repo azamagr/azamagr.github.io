@@ -242,12 +242,15 @@ function ProjectCard({ project }) {
       {project.subGrid && (
         <div className="mt-6 grid grid-cols-2 gap-3 border-t border-black/10 pt-6 dark:border-white/10 sm:grid-cols-3">
           {project.subGrid.map((item) => (
-            <div
-              key={item}
+            <a
+              key={item.name}
+              href={item.demo}
+              target="_blank"
+              rel="noreferrer"
               className="rounded-lg border border-black/10 bg-black/[0.02] px-3 py-3 text-center text-xs font-semibold text-black/70 transition-colors duration-300 hover:border-[#ff2a2a]/40 hover:bg-[#ff2a2a]/5 hover:text-[#ff2a2a] dark:border-white/10 dark:bg-white/5 dark:text-white/70"
             >
-              {item}
-            </div>
+              {item.name}
+            </a>
           ))}
         </div>
       )}
