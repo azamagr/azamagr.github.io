@@ -182,6 +182,11 @@ function ProcessCard({ id, title, desc, align }) {
       >
         {desc}
       </p>
+      <p
+  className={`max-w-sm text-sm leading-relaxed ...`}
+>
+  {desc}
+</p>
     </div>
   );
 }
