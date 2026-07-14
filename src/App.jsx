@@ -1,5 +1,6 @@
 import React from "react";
 import { ThemeProvider } from "./ThemeContext";
+import CustomCursor from "./CustomCursor";
 import Preloader from "./Preloader";
 import Navbar from "./Navbar";
 import Hero from "./Hero";
@@ -15,6 +16,7 @@ import Footer from "./Footer";
 export default function App() {
   return (
     <ThemeProvider>
+      <CustomCursor />
       <Preloader>
         <Navbar />
         <Hero bgImageSrc="/IMG/video.png" />
