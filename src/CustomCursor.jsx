@@ -1,25 +1,28 @@
 import React, { useEffect, useState } from "react";
 import { motion, useMotionValue, useSpring } from "framer-motion";
+import { Bot } from "lucide-react";
 
 /**
  * CustomCursor
  * ---------------------------------------------------------------------------
- * A distinctive "invert" cursor (the Awwwards-style trick): the ring uses
- * `mix-blend-mode: difference`, so it automatically inverts against
- * whatever is behind it — visible and striking on the red Hero, white
- * sections, and the black Footer alike, with zero manual color logic.
+ * An "AI/bot" themed cursor:
  *
- *  - Small solid dot: tracks the raw cursor position instantly.
- *  - Larger blend-mode ring: trails behind with spring physics, and
- *    grows + fills solid on hover over links/buttons.
+ *  - A pulsing glowing red core (like a HUD reticle / active sensor).
+ *  - A dashed ring around it that continuously rotates slowly — a subtle
+ *    "scanning" motion, giving it a tech/AI feel even at rest.
+ *  - On hovering any link/button, the ring spins up fast, expands, and
+ *    a small robot icon fades in at the center — like the cursor
+ *    "engages" when it detects something interactive.
+ *  - Uses `mix-blend-mode: difference` on the ring so it stays visible
+ *    against any background (red hero, white sections, black footer)
+ *    without any manual color logic.
  *
  * Usage — mount ONCE near the root of your app:
  *   <CustomCursor />
  *
- * Note: the cursor UI only renders at sm breakpoint (640px) and above,
- * and is skipped entirely on touch devices — so it won't interfere with
- * mobile or a narrow resized browser window. If you're testing and don't
- * see it, make sure your window/viewport is wider than 640px.
+ * Note: only renders at sm breakpoint (640px) and above, and is skipped
+ * on touch devices. Move the mouse after load — it only appears once
+ * the cursor actually moves.
  */
 
 export default function CustomCursor() {
@@ -65,8 +68,6 @@ export default function CustomCursor() {
         });
     };
 
-    // Re-scan periodically for newly-mounted links/buttons (e.g. after the
-    // preloader unmounts and reveals the rest of the page)
     let cleanupHover = attachHoverListeners();
     const rescan = setInterval(() => {
       cleanupHover();
@@ -91,28 +92,73 @@ export default function CustomCursor() {
         visible ? "opacity-100" : "opacity-0"
       }`}
     >
-      {/* Small solid red dot — tracks instantly, sits above the ring */}
+      {/* Glowing pulsing core — the "sensor" */}
       <motion.div
         style={{ translateX: x, translateY: y }}
-        className="absolute left-0 top-0 h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#ff2a2a]"
+        animate={{
+          scale: hovering ? [1, 0.7, 1] : [1, 1.3, 1],
+          boxShadow: hovering
+            ? "0 0 0px rgba(255,42,42,0)"
+            : [
+                "0 0 6px rgba(255,42,42,0.9)",
+                "0 0 14px rgba(255,42,42,0.6)",
+                "0 0 6px rgba(255,42,42,0.9)",
+              ],
+        }}
+        transition={{ duration: 1.4, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute left-0 top-0 h-2 w-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#ff2a2a]"
       />
 
-      {/* Blend-mode ring: inverts against whatever is underneath it,
-          so it's always visible — red hero, white sections, black footer */}
-      <motion.div
+      {/* Dashed scanning ring — rotates slowly at rest, spins up + expands
+          on hover, using mix-blend-mode so it's visible on any background */}
+      <motion.svg
         style={{
           translateX: ringX,
           translateY: ringY,
           mixBlendMode: "difference",
         }}
         animate={{
-          width: hovering ? 64 : 34,
-          height: hovering ? 64 : 34,
-          backgroundColor: hovering ? "#ffffff" : "rgba(255,255,255,0)",
+          rotate: 360,
+          width: hovering ? 56 : 30,
+          height: hovering ? 56 : 30,
         }}
-        transition={{ duration: 0.25, ease: "easeOut" }}
-        className="absolute left-0 top-0 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-white"
-      />
+        transition={{
+          rotate: {
+            duration: hovering ? 1.2 : 6,
+            repeat: Infinity,
+            ease: "linear",
+          },
+          width: { duration: 0.3, ease: "easeOut" },
+          height: { duration: 0.3, ease: "easeOut" },
+        }}
+        viewBox="0 0 40 40"
+        className="absolute left-0 top-0 -translate-x-1/2 -translate-y-1/2"
+      >
+        <circle
+          cx="20"
+          cy="20"
+          r="17"
+          fill="none"
+          stroke="white"
+          strokeWidth="1.5"
+          strokeDasharray="6 5"
+        />
+        {/* Small tick marks, like a targeting reticle */}
+        <circle cx="20" cy="3" r="1.4" fill="white" />
+        <circle cx="20" cy="37" r="1.4" fill="white" />
+        <circle cx="3" cy="20" r="1.4" fill="white" />
+        <circle cx="37" cy="20" r="1.4" fill="white" />
+      </motion.svg>
+
+      {/* Bot icon — fades in at the center when "engaged" (hovering) */}
+      <motion.div
+        style={{ translateX: ringX, translateY: ringY }}
+        animate={{ opacity: hovering ? 1 : 0, scale: hovering ? 1 : 0.4 }}
+        transition={{ duration: 0.2, ease: "easeOut" }}
+        className="absolute left-0 top-0 -translate-x-1/2 -translate-y-1/2 text-[#ff2a2a]"
+      >
+        <Bot className="h-5 w-5" strokeWidth={2} />
+      </motion.div>
     </div>
   );
 }
