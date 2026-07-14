@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { motion, useMotionValue, useSpring } from "framer-motion";
-import { ArrowUpRight } from "lucide-react";
 
 /**
  * CustomCursor
@@ -114,17 +113,6 @@ export default function CustomCursor() {
         transition={{ duration: 0.25, ease: "easeOut" }}
         className="absolute left-0 top-0 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-white"
       />
-
-      {/* Small arrow icon, fades in centered inside the ring on hover —
-          an extra, unmistakable "this is clickable" signal */}
-      <motion.div
-        style={{ translateX: ringX, translateY: ringY }}
-        animate={{ opacity: hovering ? 1 : 0, scale: hovering ? 1 : 0.5 }}
-        transition={{ duration: 0.2, ease: "easeOut" }}
-        className="absolute left-0 top-0 -translate-x-1/2 -translate-y-1/2 text-black"
-      >
-        <ArrowUpRight className="h-4 w-4" strokeWidth={2.5} />
-      </motion.div>
     </div>
   );
 }
