@@ -5,3 +5,11 @@
 html {
   scroll-behavior: smooth;
 }
+
+/* Hide the native cursor only on real-mouse devices, so <CustomCursor />
+   is the only pointer shown. Touch devices are untouched. */
+@media (hover: hover) and (pointer: fine) {
+  * {
+    cursor: none !important;
+  }
+}
