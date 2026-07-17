@@ -1,6 +1,12 @@
 import React, { useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { Github, Linkedin, Globe, Mail, MapPin, Phone } from "lucide-react";
+import emailjs from "@emailjs/browser";
+import {
+  EMAILJS_SERVICE_ID,
+  EMAILJS_TEMPLATE_ID,
+  EMAILJS_PUBLIC_KEY,
+} from "./emailConfig";
 
 /**
  * Contact
@@ -15,27 +21,47 @@ import { Github, Linkedin, Globe, Mail, MapPin, Phone } from "lucide-react";
  *  - Right: a minimal form (Name / Email / Subject / Message) with
  *    transparent, bottom-border-only inputs that glow red on focus, and
  *    a pill submit button with a liquid-fill hover effect.
+ *  - On submit, sends a real email to you via EmailJS (no backend needed —
+ *    works on static GitHub Pages hosting). Fill in your keys in
+ *    src/emailConfig.js first — see that file for setup steps.
  *
  * Usage:
- *   <Contact onSubmit={(data) => console.log(data)} />
+ *   <Contact />
  */
 
-export default function Contact({ onSubmit }) {
+export default function Contact() {
   const [form, setForm] = useState({
     name: "",
     email: "",
     subject: "",
     message: "",
   });
-  const [sent, setSent] = useState(false);
+  const [status, setStatus] = useState("idle"); // idle | sending | sent | error
 
   const handleChange = (e) =>
     setForm((f) => ({ ...f, [e.target.name]: e.target.value }));
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    onSubmit?.(form);
-    setSent(true);
+    setStatus("sending");
+    try {
+      await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        {
+          name: form.name,
+          email: form.email,
+          subject: form.subject,
+          message: form.message,
+        },
+        { publicKey: EMAILJS_PUBLIC_KEY }
+      );
+      setStatus("sent");
+      setForm({ name: "", email: "", subject: "", message: "" });
+    } catch (err) {
+      console.error("EmailJS send failed:", err);
+      setStatus("error");
+    }
   };
 
   return (
@@ -77,13 +103,13 @@ export default function Contact({ onSubmit }) {
           </div>
 
           <div className="mt-12 flex items-center gap-5">
-            <MagneticIcon href="https://www.linkedin.com/in/azamagr" label="LinkedIn">
+            <MagneticIcon href="https://linkedin.com/" label="LinkedIn">
               <Linkedin className="h-5 w-5" />
             </MagneticIcon>
-            <MagneticIcon href="https://github.com/azamagr" label="GitHub">
+            <MagneticIcon href="https://github.com/" label="GitHub">
               <Github className="h-5 w-5" />
             </MagneticIcon>
-            <MagneticIcon href="https://azamagr.github.io/" label="Portfolio">
+            <MagneticIcon href="#" label="Portfolio">
               <Globe className="h-5 w-5" />
             </MagneticIcon>
           </div>
@@ -119,7 +145,24 @@ export default function Contact({ onSubmit }) {
             onChange={handleChange}
           />
 
-          <LiquidButton>{sent ? "Message Sent ✓" : "Send Message"}</LiquidButton>
+          <LiquidButton disabled={status === "sending"}>
+            {status === "sending"
+              ? "Sending..."
+              : status === "sent"
+              ? "Message Sent ✓"
+              : status === "error"
+              ? "Failed — try again"
+              : "Send Message"}
+          </LiquidButton>
+          {status === "error" && (
+            <p className="text-sm text-[#ff2a2a]">
+              Something went wrong. Please try again, or email me directly at{" "}
+              <a href="mailto:azamghafoorreal@gmail.com" className="underline">
+                azamghafoorreal@gmail.com
+              </a>
+              .
+            </p>
+          )}
         </form>
       </div>
     </section>
@@ -194,11 +237,12 @@ function FormField({ label, name, value, onChange, type = "text", as, rows }) {
   );
 }
 
-function LiquidButton({ children }) {
+function LiquidButton({ children, disabled = false }) {
   return (
     <button
       type="submit"
-      className="group relative mt-2 w-full overflow-hidden rounded-full border border-black/20 px-8 py-4 text-sm font-semibold text-black transition-colors duration-300 dark:border-white/20 dark:text-white sm:w-fit"
+      disabled={disabled}
+      className="group relative mt-2 w-full overflow-hidden rounded-full border border-black/20 px-8 py-4 text-sm font-semibold text-black transition-colors duration-300 disabled:cursor-not-allowed disabled:opacity-60 dark:border-white/20 dark:text-white sm:w-fit"
     >
       {/* Liquid fill layer */}
       <span className="absolute inset-0 -z-0 origin-bottom scale-y-0 bg-[#ff2a2a] transition-transform duration-500 ease-[cubic-bezier(0.65,0,0.35,1)] group-hover:scale-y-100" />
