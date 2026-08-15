@@ -14,6 +14,6 @@
  * 5. Paste all three below.
  */
 
-export const EMAILJS_SERVICE_ID = "service_4bv4opt";
-export const EMAILJS_TEMPLATE_ID = "YOUR_TEMPLATE_ID";
-export const EMAILJS_PUBLIC_KEY = "YOUR_PUBLIC_KEY";
+export const EMAILJS_SERVICE_ID = "service_fx0gvmi";
+export const EMAILJS_TEMPLATE_ID = "template_ejzm3k2";
+export const EMAILJS_PUBLIC_KEY = "x12hHG20H7mcYxm3o";
